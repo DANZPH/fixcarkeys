@@ -1,51 +1,74 @@
 :root {
-  /* Core Colors */
-  --background: #05050A; /* Very dark blue/black */
-  --surface: #0f1016;
-  --surface-highlight: #1a1b26;
-  
-  --primary: #3b82f6;
-  --primary-glow: rgba(59, 130, 246, 0.5);
-  --secondary: #6366f1;
-  
-  --accent: #f59e0b; /* Amber/Gold for locksmith/security feel */
-  --accent-glow: rgba(245, 158, 11, 0.5);
-  
-  --success: #10b981;
-  --error: #ef4444;
-  
-  --text-main: #f3f4f6;
-  --text-muted: #9ca3af;
-  --text-dim: #4b5563;
-
-  /* Glassmorphism */
-  --glass-bg: rgba(15, 16, 22, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-blur: 12px;
-
-  /* Spacing & Radius */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-  --radius-full: 9999px;
-  
-  /* Transitions */
-  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --color-cream: #F1F3E0;
+  --color-sage-light: #D2DCB6;
+  --color-sage: #A1BC98;
+  --color-sage-dark: #778873;
 }
 
 * {
-  box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--color-cream);
+  color: #333;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.btn-primary {
+  background-color: var(--color-sage-dark);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-sage);
+}
+
+.btn-secondary {
+  background-color: var(--color-sage);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-sage-dark);
+}
+
+.section-title {
+  font-size: 2.5rem;
+  color: var(--color-sage-dark);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.section-subtitle {
+  color: #666;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+
+/* Navbar responsive styles */
+@media (max-width: 768px) {
+  .nav-links { display: none !important; }
+  .mobile-menu-btn { display: block !important; }
 }

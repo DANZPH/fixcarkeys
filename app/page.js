@@ -1,6 +1,8 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import carHero from '@/assets/car_hero.png';
 
 function AreasSection({ areas }) {
   const [openIndex, setOpenIndex] = useState(null);
@@ -107,18 +109,18 @@ const services = [
 ];
 
 const brands = [
-  { name: 'BMW', desc: 'Comfort access & digital keys' },
-  { name: 'Mercedes-Benz', desc: 'Smart keys & keyless go' },
-  { name: 'Audi', desc: 'Advanced key systems' },
-  { name: 'Volkswagen', desc: 'Transponder & remote keys' },
-  { name: 'Toyota', desc: 'Smart keys & remotes' },
-  { name: 'Honda', desc: 'Key fobs & smart entry' },
-  { name: 'Ford', desc: 'Intelligent access keys' },
-  { name: 'Nissan', desc: 'Intelligent keys' },
-  { name: 'Chevrolet', desc: 'Keyless entry systems' },
-  { name: 'Hyundai', desc: 'Smart keys & proximity' },
-  { name: 'Kia', desc: 'Smart key programming' },
-  { name: 'Lexus', desc: 'Smart access keys' },
+  { name: 'BMW', desc: 'Comfort access & digital keys', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/44/BMW.svg' },
+  { name: 'Mercedes-Benz', desc: 'Smart keys & keyless go', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg' },
+  { name: 'Audi', desc: 'Advanced key systems', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/92/Audi-Logo_2016.svg' },
+  { name: 'Volkswagen', desc: 'Transponder & remote keys', logo: 'https://upload.wikimedia.org/wikipedia/commons/6/6d/Volkswagen_logo_2019.svg' },
+  { name: 'Toyota', desc: 'Smart keys & remotes', logo: 'https://upload.wikimedia.org/wikipedia/commons/e/e7/Toyota.svg' },
+  { name: 'Honda', desc: 'Key fobs & smart entry', logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Honda_Logo.svg' },
+  { name: 'Ford', desc: 'Intelligent access keys', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Ford_Motor_Company_Logo.svg' },
+  { name: 'Nissan', desc: 'Intelligent keys', logo: 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Nissan_2020_logo.svg' },
+  { name: 'Chevrolet', desc: 'Keyless entry systems', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/1f/Chevrolet_logo.svg' },
+  { name: 'Hyundai', desc: 'Smart keys & proximity', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Hyundai_Motor_Company_logo.svg' },
+  { name: 'Kia', desc: 'Smart key programming', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/13/Kia-logo.svg' },
+  { name: 'Lexus', desc: 'Smart access keys', logo: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Lexus_division_emblem.svg' },
 ];
 
 const areas = [
@@ -157,92 +159,126 @@ export default function Home() {
       {/* Hero Section */}
       <section id="home" style={{
         background: 'linear-gradient(135deg, #778873 0%, #A1BC98 50%, #D2DCB6 100%)',
-        padding: '100px 0',
+        padding: '140px 0 100px',
         color: 'white',
         minHeight: '100vh',
         display: 'flex',
-        alignItems: 'center'
+        position: 'relative',
+        overflow: 'hidden'
       }}>
-        <div className="container">
-          <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-            <span style={{
-              backgroundColor: 'rgba(255,255,255,0.2)',
-              padding: '8px 20px',
-              borderRadius: '50px',
-              fontSize: '0.9rem',
-              fontWeight: '500',
-              display: 'inline-block',
-              marginBottom: '1.5rem'
-            }}>
-              🚗 Trusted by 500+ Happy Customers
-            </span>
-            <h1 style={{
-              fontSize: '3.5rem',
-              marginBottom: '1.5rem',
-              fontWeight: '700',
-              lineHeight: 1.2,
-              letterSpacing: '-1px'
-            }}>
-              Professional Car Key<br />Services You Can Trust
-            </h1>
-            <p style={{
-              fontSize: '1.25rem',
-              marginBottom: '2.5rem',
-              opacity: 0.95,
-              lineHeight: 1.7,
-              maxWidth: '600px',
-              margin: '0 auto 2.5rem'
-            }}>
-              Lost your car keys? Need a spare? We provide fast, reliable car key cutting, 
-              programming, and replacement services for all vehicle makes and models.
-            </p>
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '3rem' }}>
-              <a href="#contact" onClick={(e) => { e.preventDefault(); scrollTo('#contact'); }}
-                style={{
-                  backgroundColor: '#F1F3E0',
-                  color: '#778873',
-                  padding: '16px 32px',
-                  borderRadius: '10px',
-                  textDecoration: 'none',
-                  fontWeight: '600',
-                  fontSize: '1.05rem',
-                  transition: 'all 0.3s ease',
-                  boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
-                }}>
-                Get a Free Quote →
-              </a>
-              <a href="#services" onClick={(e) => { e.preventDefault(); scrollTo('#services'); }}
-                style={{
-                  border: '2px solid rgba(255,255,255,0.8)',
-                  color: 'white',
-                  padding: '14px 30px',
-                  borderRadius: '10px',
-                  textDecoration: 'none',
-                  fontWeight: '600',
-                  fontSize: '1.05rem'
-                }}>
-                View Services
-              </a>
+        {/* Grid Background */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: `
+            linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px',
+          pointerEvents: 'none',
+          zIndex: 0
+        }} />
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '4rem',
+            flexWrap: 'wrap-reverse'
+          }}>
+            <div style={{ flex: '1 1 500px', textAlign: 'left' }}>
+              <h1 style={{
+                fontSize: '4.5rem',
+                marginBottom: '0.5rem',
+                fontWeight: '800',
+                lineHeight: 1.1,
+                letterSpacing: '-2px',
+                textShadow: '0 2px 10px rgba(0,0,0,0.1)'
+              }}>
+                FixCarKeys
+              </h1>
+              <div style={{
+                fontSize: '1.5rem',
+                fontWeight: '700',
+                marginBottom: '2rem',
+                letterSpacing: '3px',
+                textTransform: 'uppercase',
+                opacity: 0.95,
+                textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+              }}>
+                MOBILE AUTO LOCKSMITH
+              </div>
+              <p style={{
+                fontSize: '1.25rem',
+                marginBottom: '2.5rem',
+                opacity: 0.95,
+                lineHeight: 1.7,
+                maxWidth: '600px'
+              }}>
+                Lost your car keys? Need a spare? We provide fast, reliable car key cutting,
+                programming, and replacement services for all vehicle makes and models.
+              </p>
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '3rem' }}>
+                <a href="#contact" onClick={(e) => { e.preventDefault(); scrollTo('#contact'); }}
+                  style={{
+                    backgroundColor: '#F1F3E0',
+                    color: '#778873',
+                    padding: '16px 32px',
+                    borderRadius: '10px',
+                    textDecoration: 'none',
+                    fontWeight: '600',
+                    fontSize: '1.05rem',
+                    transition: 'all 0.3s ease',
+                    boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
+                  }}>
+                  Get a Free Quote →
+                </a>
+                <a href="#services" onClick={(e) => { e.preventDefault(); scrollTo('#services'); }}
+                  style={{
+                    border: '2px solid rgba(255,255,255,0.8)',
+                    color: 'white',
+                    padding: '14px 30px',
+                    borderRadius: '10px',
+                    textDecoration: 'none',
+                    fontWeight: '600',
+                    fontSize: '1.05rem'
+                  }}>
+                  View Services
+                </a>
+              </div>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gap: '2rem',
+                maxWidth: '500px',
+                paddingTop: '2rem',
+                borderTop: '1px solid rgba(255,255,255,0.2)'
+              }}>
+                {[
+                  { num: '24/7', label: 'Emergency Service' },
+                  { num: '15+', label: 'Years Experience' },
+                  { num: '100%', label: 'Satisfaction' }
+                ].map((stat, i) => (
+                  <div key={i}>
+                    <div style={{ fontSize: '2rem', fontWeight: '700' }}>{stat.num}</div>
+                    <div style={{ opacity: 0.85, fontSize: '0.9rem' }}>{stat.label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: '2rem',
-              maxWidth: '500px',
-              margin: '0 auto',
-              paddingTop: '2rem',
-              borderTop: '1px solid rgba(255,255,255,0.2)'
-            }}>
-              {[
-                { num: '24/7', label: 'Emergency Service' },
-                { num: '15+', label: 'Years Experience' },
-                { num: '100%', label: 'Satisfaction' }
-              ].map((stat, i) => (
-                <div key={i} style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: '2rem', fontWeight: '700' }}>{stat.num}</div>
-                  <div style={{ opacity: 0.85, fontSize: '0.9rem' }}>{stat.label}</div>
-                </div>
-              ))}
+
+            <div style={{ flex: '1 1 400px', display: 'flex', justifyContent: 'center' }}>
+              <div style={{
+                position: 'relative',
+                width: '100%',
+                maxWidth: '600px',
+                filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.2))'
+              }}>
+                <Image src={carHero} alt="Luxury Car Key Service" priority style={{ width: '120%', height: 'auto', objectFit: 'contain' }} />
+              </div>
             </div>
           </div>
         </div>
@@ -294,30 +330,173 @@ export default function Home() {
       </section>
 
       {/* Car Brands Section */}
-      <section id="car-brands" style={{ padding: '100px 0', backgroundColor: '#D2DCB6' }}>
-        <div className="container">
-          <h2 className="section-title">Car Brands We Service</h2>
-          <p className="section-subtitle">Expert key services for all major vehicle manufacturers</p>
+      <section id="car-brands" style={{
+        padding: '60px 0',
+        background: 'linear-gradient(135deg, #778873 0%, #A1BC98 50%, #D2DCB6 100%)',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        {/* Decorative background elements */}
+        <div style={{
+          position: 'absolute',
+          top: '-50%',
+          left: '-10%',
+          width: '300px',
+          height: '300px',
+          borderRadius: '50%',
+          background: 'rgba(255,255,255,0.05)',
+          filter: 'blur(60px)'
+        }} />
+        <div style={{
+          position: 'absolute',
+          bottom: '-30%',
+          right: '-5%',
+          width: '200px',
+          height: '200px',
+          borderRadius: '50%',
+          background: 'rgba(255,255,255,0.08)',
+          filter: 'blur(40px)'
+        }} />
+
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+            <span style={{
+              display: 'inline-block',
+              backgroundColor: 'rgba(255,255,255,0.2)',
+              backdropFilter: 'blur(10px)',
+              color: 'white',
+              padding: '6px 14px',
+              borderRadius: '50px',
+              fontSize: '0.75rem',
+              fontWeight: '500',
+              marginBottom: '0.75rem',
+              border: '1px solid rgba(255,255,255,0.3)'
+            }}>
+              🚗 All Major Manufacturers
+            </span>
+            <h2 style={{
+              fontSize: '2rem',
+              color: 'white',
+              marginBottom: '0.5rem',
+              fontWeight: '700',
+              letterSpacing: '-0.5px'
+            }}>Car Brands We Service</h2>
+            <p style={{
+              color: 'rgba(255,255,255,0.9)',
+              fontSize: '0.95rem',
+              maxWidth: '400px',
+              margin: '0 auto'
+            }}>Expert key services for all major manufacturers</p>
+          </div>
+
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '1.25rem'
+            gridTemplateColumns: 'repeat(6, 1fr)',
+            gap: '0.875rem'
           }}>
             {brands.map((brand, i) => (
               <div key={i} className="card" style={{
-                backgroundColor: 'white',
-                padding: '1.5rem',
+                backgroundColor: 'rgba(255,255,255,0.95)',
+                backdropFilter: 'blur(20px)',
+                padding: '1rem 0.75rem',
                 borderRadius: '12px',
-                borderLeft: '4px solid #778873',
-                boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
+                boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                textAlign: 'center',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                cursor: 'pointer',
+                position: 'relative',
+                overflow: 'hidden'
               }}>
-                <h3 style={{ color: '#778873', marginBottom: '0.35rem', fontSize: '1.1rem', fontWeight: '600' }}>{brand.name}</h3>
-                <p style={{ color: '#666', fontSize: '0.85rem', margin: 0 }}>{brand.desc}</p>
+                {/* Gradient overlay on hover effect */}
+                <div style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: '3px',
+                  background: 'linear-gradient(90deg, #778873, #A1BC98, #D2DCB6)',
+                  borderRadius: '12px 12px 0 0'
+                }} />
+
+                {/* Logo container */}
+                <div style={{
+                  width: '48px',
+                  height: '48px',
+                  margin: '0 auto 0.6rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: '#f8f9fa',
+                  borderRadius: '10px',
+                  padding: '8px',
+                  transition: 'all 0.3s ease'
+                }}>
+                  <img
+                    src={brand.logo}
+                    alt={`${brand.name} logo`}
+                    style={{
+                      maxWidth: '100%',
+                      maxHeight: '100%',
+                      objectFit: 'contain',
+                      filter: 'grayscale(0%)',
+                      transition: 'all 0.3s ease'
+                    }}
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  <div style={{
+                    display: 'none',
+                    width: '100%',
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '1.25rem',
+                    fontWeight: '700',
+                    color: '#778873',
+                    background: 'linear-gradient(135deg, #778873, #A1BC98)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent'
+                  }}>
+                    {brand.name.charAt(0)}
+                  </div>
+                </div>
+
+                <h3 style={{
+                  color: '#778873',
+                  marginBottom: '0.2rem',
+                  fontSize: '0.85rem',
+                  fontWeight: '600',
+                  letterSpacing: '-0.2px'
+                }}>{brand.name}</h3>
+                <p style={{
+                  color: '#888',
+                  fontSize: '0.7rem',
+                  margin: 0,
+                  lineHeight: 1.3
+                }}>{brand.desc}</p>
               </div>
             ))}
           </div>
-          <p style={{ textAlign: 'center', marginTop: '2.5rem', color: '#555' }}>
-            Don't see your brand? <strong>We service virtually all makes and models!</strong>
+
+          {/* Bottom CTA - Inline */}
+          <p style={{
+            textAlign: 'center',
+            marginTop: '1.5rem',
+            color: 'rgba(255,255,255,0.95)',
+            fontSize: '0.9rem'
+          }}>
+            Don't see your brand? <a
+              href="#contact"
+              onClick={(e) => { e.preventDefault(); scrollTo('#contact'); }}
+              style={{
+                color: 'white',
+                fontWeight: '600',
+                textDecoration: 'underline'
+              }}
+            >Contact us</a> — we service virtually all makes and models!
           </p>
         </div>
       </section>
@@ -416,7 +595,7 @@ export default function Home() {
             maxWidth: '1000px',
             margin: '0 auto'
           }}>
-            <form onSubmit={(e) => { e.preventDefault(); alert('Thank you! We will contact you soon.'); }} 
+            <form onSubmit={(e) => { e.preventDefault(); alert('Thank you! We will contact you soon.'); }}
               style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <input type="text" placeholder="Your Name" required style={{
                 padding: '16px 20px',

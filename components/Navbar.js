@@ -1,5 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import logo from '@/assets/logo_full.png';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,15 +48,15 @@ export default function Navbar() {
         alignItems: 'center'
       }}>
         <a href="#home" onClick={(e) => scrollToSection(e, '#home')} style={{
-          fontSize: '1.5rem',
-          fontWeight: '700',
-          color: '#F1F3E0',
           textDecoration: 'none',
           display: 'flex',
           alignItems: 'center',
           gap: '0.5rem'
         }}>
-          🔑 FixCarKeys
+          <div style={{ position: 'relative', width: '40px', height: '40px' }}>
+            <Image src={logo} alt="FixCarKeys Logo" fill style={{ objectFit: 'contain' }} />
+          </div>
+          <span style={{ fontSize: '1.5rem', fontWeight: '700', color: '#F1F3E0' }}>FixCarKeys</span>
         </a>
 
         <button onClick={() => setIsOpen(!isOpen)} className="mobile-menu-btn" style={{
@@ -86,7 +88,7 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          <a href="#contact" onClick={(e) => scrollToSection(e, '#contact')} style={{
+          <a href="tel:07444125447" style={{
             backgroundColor: '#F1F3E0',
             color: '#778873',
             padding: '10px 20px',
@@ -94,9 +96,12 @@ export default function Navbar() {
             textDecoration: 'none',
             fontWeight: '600',
             fontSize: '0.9rem',
-            transition: 'all 0.3s ease'
+            transition: 'all 0.3s ease',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem'
           }}>
-            Get Quote
+            📞 Call Now
           </a>
         </div>
       </div>

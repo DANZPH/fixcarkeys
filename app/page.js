@@ -4,6 +4,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import carHero from '@/assets/car_hero.png';
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+import { FocusCards } from "@/components/ui/focus-cards";
+import keyCuttingImg from '@/assets/key_cutting_service.png';
+import keyProgrammingImg from '@/assets/key_programming_service.png';
+import remoteKeyFobImg from '@/assets/remote_key_fob_service.png';
+import keyReplacementImg from '@/assets/key_replacement_service.png';
+import emergencyLockoutImg from '@/assets/emergency_lockout_service.png';
+import ignitionRepairImg from '@/assets/ignition_repair_service.png';
 
 function AreasSection({ areas }) {
   const [openIndex, setOpenIndex] = useState(null);
@@ -19,16 +26,16 @@ function AreasSection({ areas }) {
             {areas.map((area, i) => (
               <div key={i} style={{
                 backgroundColor: 'white',
-                marginBottom: '0.5rem',
-                borderRadius: '8px',
+                marginBottom: '0.25rem',
+                borderRadius: '6px',
                 overflow: 'hidden',
-                boxShadow: '0 1px 3px rgba(0,0,0,0.08)'
+                boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
               }}>
                 <button
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
                   style={{
                     width: '100%',
-                    padding: '1rem 1.25rem',
+                    padding: '0.75rem 1rem',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
@@ -36,7 +43,7 @@ function AreasSection({ areas }) {
                     border: 'none',
                     borderBottom: openIndex === i ? '1px solid #eee' : 'none',
                     cursor: 'pointer',
-                    fontSize: '1rem',
+                    fontSize: '0.9rem',
                     fontWeight: '500',
                     color: '#778873',
                     textAlign: 'left'
@@ -101,12 +108,48 @@ function AreasSection({ areas }) {
 }
 
 const services = [
-  { icon: '🔑', title: 'Key Cutting', desc: 'Precision key cutting for all vehicle types including standard, laser-cut, and high-security keys.', features: ['All key types', 'On-site service', 'Same-day completion'] },
-  { icon: '💻', title: 'Key Programming', desc: 'Expert transponder and smart key programming for modern vehicles with advanced security.', features: ['Transponder keys', 'Smart keys', 'Remote fobs'] },
-  { icon: '🔄', title: 'Key Replacement', desc: 'Complete key replacement solutions when you\'ve lost all your keys or need extras.', features: ['All makes & models', 'OEM quality', 'Warranty included'] },
-  { icon: '🚗', title: 'Emergency Lockout', desc: '24/7 emergency lockout assistance to get you back on the road quickly and safely.', features: ['24/7 availability', 'Fast response', 'No damage entry'] },
-  { icon: '🔧', title: 'Ignition Repair', desc: 'Professional ignition cylinder repair and replacement services for all vehicles.', features: ['Diagnosis', 'Repair', 'Full replacement'] },
-  { icon: '📱', title: 'Remote Key Fob', desc: 'Remote key fob programming, repair, and battery replacement services.', features: ['Programming', 'Battery swap', 'Shell replacement'] },
+  {
+    icon: '🔑',
+    title: 'Key Cutting',
+    desc: 'Precision key cutting for all vehicle types including standard, laser-cut, and high-security keys.',
+    features: ['All key types', 'On-site service', 'Same-day completion'],
+    src: keyCuttingImg.src
+  },
+  {
+    icon: '💻',
+    title: 'Key Programming',
+    desc: 'Expert transponder and smart key programming for modern vehicles with advanced security.',
+    features: ['Transponder keys', 'Smart keys', 'Remote fobs'],
+    src: keyProgrammingImg.src
+  },
+  {
+    icon: '🔄',
+    title: 'Key Replacement',
+    desc: 'Complete key replacement solutions when you\'ve lost all your keys or need extras.',
+    features: ['All makes & models', 'OEM quality', 'Warranty included'],
+    src: keyReplacementImg.src
+  },
+  {
+    icon: '🚗',
+    title: 'Emergency Lockout',
+    desc: '24/7 emergency lockout assistance to get you back on the road quickly and safely.',
+    features: ['24/7 availability', 'Fast response', 'No damage entry'],
+    src: emergencyLockoutImg.src
+  },
+  {
+    icon: '🔧',
+    title: 'Ignition Repair',
+    desc: 'Professional ignition cylinder repair and replacement services for all vehicles.',
+    features: ['Diagnosis', 'Repair', 'Full replacement'],
+    src: ignitionRepairImg.src
+  },
+  {
+    icon: '📱',
+    title: 'Remote Key Fob',
+    desc: 'Remote key fob programming, repair, and battery replacement services.',
+    features: ['Programming', 'Battery swap', 'Shell replacement'],
+    src: remoteKeyFobImg.src
+  },
 ];
 
 const brands = [
@@ -316,41 +359,8 @@ export default function Home() {
         <div className="container">
           <h2 className="section-title">Our Services</h2>
           <p className="section-subtitle">Professional car key solutions tailored to your needs</p>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '2rem'
-          }}>
-            {services.map((service, i) => (
-              <div key={i} className="card" style={{
-                backgroundColor: 'white',
-                padding: '2.5rem',
-                borderRadius: '16px',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
-                border: '1px solid rgba(0,0,0,0.04)'
-              }}>
-                <div style={{
-                  fontSize: '2.5rem',
-                  marginBottom: '1.25rem',
-                  backgroundColor: '#F1F3E0',
-                  width: '70px',
-                  height: '70px',
-                  borderRadius: '14px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>{service.icon}</div>
-                <h3 style={{ color: '#778873', marginBottom: '0.75rem', fontSize: '1.35rem', fontWeight: '600' }}>{service.title}</h3>
-                <p style={{ color: '#666', marginBottom: '1.25rem', lineHeight: 1.7, fontSize: '0.95rem' }}>{service.desc}</p>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                  {service.features.map((f, j) => (
-                    <li key={j} style={{ color: '#555', padding: '0.4rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem' }}>
-                      <span style={{ color: '#A1BC98', fontWeight: 'bold' }}>✓</span> {f}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+          <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center' }}>
+            <FocusCards cards={services} />
           </div>
         </div>
       </section>

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import carHero from '@/assets/car_hero.png';
+import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 
 function AreasSection({ areas }) {
   const [openIndex, setOpenIndex] = useState(null);
@@ -135,13 +136,38 @@ const areas = [
   { name: 'Skelmersdale & Ormskirk', towns: ['Skelmersdale', 'Ormskirk', 'Burscough', 'Aughton', 'Rainford'] },
 ];
 
+
 const reviews = [
-  { name: 'John D.', text: 'Excellent service! Lost my car keys and they came out within 30 minutes. Very professional and affordable. Highly recommend!', date: 'Dec 2024' },
-  { name: 'Sarah M.', text: 'Had my BMW key programmed here. Great price compared to the dealership and done in no time. Will use again!', date: 'Nov 2024' },
-  { name: 'Mike R.', text: 'Emergency lockout at 2am and they still came out quickly. Absolute lifesaver! Can\'t thank them enough.', date: 'Nov 2024' },
-  { name: 'Emily K.', text: 'Needed a spare key for my Honda. Quick, easy, and half the price of the dealer. Fantastic service!', date: 'Oct 2024' },
-  { name: 'David L.', text: 'Very knowledgeable about Mercedes keys. Fixed my smart key issue on the spot. True professionals!', date: 'Oct 2024' },
-  { name: 'Lisa T.', text: 'Friendly staff and great service. Will definitely recommend to friends and family. Five stars!', date: 'Sep 2024' },
+  {
+    quote: "Absolutely spot on. Needed a spare key for my VW, got a very competitive quote, arrived first thing the next morning. Less than half an hour and all done. Key looks and works superb. Quick, great price & polite. Couldn’t ask for more.",
+    name: "Nicholas Watkins",
+    designation: "VW Owner",
+    src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    quote: "Couldn’t have rang a better locksmith. Narcis answered the phone call straight away and arrived within the hour. He had great communication and knowledge and had my van unlocked within 30 minutes. Very nice and friendly guy, highly, highly recommend. Also very fair with his prices.",
+    name: "Mathew Tait",
+    designation: "Van Owner",
+    src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    quote: "Car battery was dead and the manual lock wouldn't work. He came out within 2 hours and fixed it now problem. Even gave advise to stop it from happening again. Reasonably priced too, especially for a Sunday morning. Absolutely brilliant, thank you so much for you help. Couldn't recommend enough.",
+    name: "Karen Berrey",
+    designation: "Verified Customer",
+    src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    quote: "He is very honest and sincere. I called him for my faulty Ford S-Max car key fob. He came at the given ETA. Fix the issue promptly. I will be happy to recommend him to anyone who needs his services.",
+    name: "Harry Ade",
+    designation: "Ford Owner",
+    src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    quote: "Had a car key broken which I couldn't repair after battery replacement. Messaged company arrived at my home 30 mins later and repaired key. Happy with service and price. Recommended",
+    name: "Ian The Monk",
+    designation: "Local Guide",
+    src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
 ];
 
 const blogPosts = [
@@ -510,33 +536,9 @@ export default function Home() {
         <div className="container">
           <h2 className="section-title" style={{ color: 'white' }}>What Our Customers Say</h2>
           <p className="section-subtitle" style={{ color: 'rgba(255,255,255,0.85)' }}>Real reviews from real customers</p>
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <span style={{ fontSize: '1.5rem', letterSpacing: '2px' }}>⭐⭐⭐⭐⭐</span>
-            <p style={{ color: 'white', marginTop: '0.5rem', fontSize: '1.1rem' }}>5.0 Average Rating</p>
-          </div>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '1.5rem'
-          }}>
-            {reviews.map((review, i) => (
-              <div key={i} className="card" style={{
-                backgroundColor: 'white',
-                padding: '2rem',
-                borderRadius: '16px',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
-              }}>
-                <div style={{ marginBottom: '1rem', color: '#F4B942' }}>★★★★★</div>
-                <p style={{ color: '#444', marginBottom: '1.5rem', fontStyle: 'italic', lineHeight: 1.7, fontSize: '0.95rem' }}>
-                  "{review.text}"
-                </p>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #eee', paddingTop: '1rem' }}>
-                  <span style={{ fontWeight: '600', color: '#778873' }}>{review.name}</span>
-                  <span style={{ color: '#999', fontSize: '0.85rem' }}>{review.date}</span>
-                </div>
-              </div>
-            ))}
-          </div>
+
+
+          <AnimatedTestimonials testimonials={reviews} />
         </div>
       </section>
 

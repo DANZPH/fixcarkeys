@@ -2,9 +2,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import carHero from '@/assets/car_hero.png';
+
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { FocusCards } from "@/components/ui/focus-cards";
+import { LayoutTextFlip } from "@/components/ui/TextFlip";
+import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import keyCuttingImg from '@/assets/key_cutting_service.png';
 import keyProgrammingImg from '@/assets/key_programming_service.png';
 import remoteKeyFobImg from '@/assets/remote_key_fob_service.png';
@@ -17,7 +19,7 @@ function AreasSection({ areas }) {
 
   return (
     <section id="areas" style={{ padding: '100px 0', backgroundColor: '#F1F3E0' }}>
-      <div className="container">
+      <div className="container reveal-on-scroll">
         <h2 className="section-title">Areas We Cover</h2>
         <p className="section-subtitle">Mobile car key services across the North West UK</p>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'start' }}>
@@ -259,7 +261,7 @@ export default function Home() {
             flexWrap: 'wrap-reverse'
           }}>
             <div style={{ flex: '1 1 500px', textAlign: 'left' }}>
-              <h1 style={{
+              <h1 className="hero-title" style={{
                 fontSize: '4.5rem',
                 marginBottom: '0.5rem',
                 fontWeight: '800',
@@ -267,9 +269,13 @@ export default function Home() {
                 letterSpacing: '-2px',
                 textShadow: '0 2px 10px rgba(0,0,0,0.1)'
               }}>
-                FixCarKeys
+                <LayoutTextFlip
+                  staticText="Fix"
+                  flipWords={['CarKeys', 'AutoKeys', 'Keys', 'Fobs']}
+                  interval={2500}
+                />
               </h1>
-              <div style={{
+              <div className="hero-subtitle" style={{
                 fontSize: '1.5rem',
                 fontWeight: '700',
                 marginBottom: '2rem',
@@ -280,7 +286,7 @@ export default function Home() {
               }}>
                 MOBILE AUTO LOCKSMITH
               </div>
-              <p style={{
+              <p className="hero-description" style={{
                 fontSize: '1.25rem',
                 marginBottom: '2.5rem',
                 opacity: 0.95,
@@ -290,7 +296,7 @@ export default function Home() {
                 Lost your car keys? Need a spare? We provide fast, reliable car key cutting,
                 programming, and replacement services for all vehicle makes and models.
               </p>
-              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '3rem' }}>
+              <div className="hero-buttons" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '3rem' }}>
                 <a href="#contact" onClick={(e) => { e.preventDefault(); scrollTo('#contact'); }}
                   style={{
                     backgroundColor: '#F1F3E0',
@@ -318,7 +324,7 @@ export default function Home() {
                   View Services
                 </a>
               </div>
-              <div style={{
+              <div className="hero-stats" style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(3, 1fr)',
                 gap: '2rem',
@@ -326,27 +332,50 @@ export default function Home() {
                 paddingTop: '2rem',
                 borderTop: '1px solid rgba(255,255,255,0.2)'
               }}>
-                {[
-                  { num: '24/7', label: 'Emergency Service' },
-                  { num: '15+', label: 'Years Experience' },
-                  { num: '100%', label: 'Satisfaction' }
-                ].map((stat, i) => (
-                  <div key={i}>
-                    <div style={{ fontSize: '2rem', fontWeight: '700' }}>{stat.num}</div>
-                    <div style={{ opacity: 0.85, fontSize: '0.9rem' }}>{stat.label}</div>
+                <div>
+                  <div style={{ fontSize: '2rem', fontWeight: '700' }}>
+                    <AnimatedCounter end={24} duration={1500} suffix="/7" />
                   </div>
-                ))}
+                  <div style={{ opacity: 0.85, fontSize: '0.9rem' }}>Emergency Service</div>
+                </div>
+                <div>
+                  <div style={{ fontSize: '2rem', fontWeight: '700' }}>
+                    <AnimatedCounter end={15} duration={1800} suffix="+" />
+                  </div>
+                  <div style={{ opacity: 0.85, fontSize: '0.9rem' }}>Years Experience</div>
+                </div>
+                <div>
+                  <div style={{ fontSize: '2rem', fontWeight: '700' }}>
+                    <AnimatedCounter end={100} duration={2000} suffix="%" />
+                  </div>
+                  <div style={{ opacity: 0.85, fontSize: '0.9rem' }}>Satisfaction</div>
+                </div>
               </div>
             </div>
 
             <div style={{ flex: '1 1 400px', display: 'flex', justifyContent: 'center' }}>
-              <div style={{
+              <div className="hero-video" style={{
                 position: 'relative',
                 width: '100%',
-                maxWidth: '600px',
-                filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.2))'
-              }}>
-                <Image src={carHero} alt="Luxury Car Key Service" priority style={{ width: '120%', height: 'auto', objectFit: 'contain' }} />
+                maxWidth: '800px',
+                borderRadius: '24px',
+                overflow: 'hidden',
+                boxShadow: '0 25px 50px rgba(0,0,0,0.25)',
+                transform: 'perspective(1000px) rotateY(-5deg)',
+                transition: 'transform 0.5s ease'
+              }}
+                onMouseEnter={(e) => e.currentTarget.style.transform = 'perspective(1000px) rotateY(0deg) scale(1.02)'}
+                onMouseLeave={(e) => e.currentTarget.style.transform = 'perspective(1000px) rotateY(-5deg)'}
+              >
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
+                >
+                  <source src="/assets/Car_Moving_Video.mp4" type="video/mp4" />
+                </video>
               </div>
             </div>
           </div>
@@ -356,7 +385,7 @@ export default function Home() {
 
       {/* Services Section */}
       <section id="services" style={{ padding: '100px 0', backgroundColor: '#F1F3E0' }}>
-        <div className="container">
+        <div className="container reveal-on-scroll">
           <h2 className="section-title">Our Services</h2>
           <p className="section-subtitle">Professional car key solutions tailored to your needs</p>
           <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center' }}>
@@ -394,7 +423,7 @@ export default function Home() {
           filter: 'blur(40px)'
         }} />
 
-        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+        <div className="container reveal-on-scroll" style={{ position: 'relative', zIndex: 1 }}>
           <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
             <span style={{
               display: 'inline-block',
@@ -543,7 +572,7 @@ export default function Home() {
 
       {/* Reviews Section */}
       <section id="reviews" style={{ padding: '100px 0', backgroundColor: '#778873' }}>
-        <div className="container">
+        <div className="container reveal-on-scroll">
           <h2 className="section-title" style={{ color: 'white' }}>What Our Customers Say</h2>
           <p className="section-subtitle" style={{ color: 'rgba(255,255,255,0.85)' }}>Real reviews from real customers</p>
 
@@ -554,7 +583,7 @@ export default function Home() {
 
       {/* Blog Section */}
       <section id="blog" style={{ padding: '100px 0', backgroundColor: '#F1F3E0' }}>
-        <div className="container">
+        <div className="container reveal-on-scroll">
           <h2 className="section-title">Tips & Resources</h2>
           <p className="section-subtitle">Helpful articles about car keys and locksmith services</p>
           <div style={{
@@ -597,7 +626,7 @@ export default function Home() {
 
       {/* Contact Section */}
       <section id="contact" style={{ padding: '100px 0', backgroundColor: '#A1BC98' }}>
-        <div className="container">
+        <div className="container reveal-on-scroll">
           <h2 className="section-title" style={{ color: 'white' }}>Get In Touch</h2>
           <p className="section-subtitle" style={{ color: 'rgba(255,255,255,0.9)' }}>Ready to get started? Contact us for a free quote</p>
           <div style={{

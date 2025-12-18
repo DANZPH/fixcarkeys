@@ -74,12 +74,13 @@ export const AnimatedTestimonials = ({
                   width={500}
                   height={500}
                   draggable={false}
+                  suppressHydrationWarning
                   className="h-full w-full rounded-3xl object-cover object-center" />
               </motion.div>
             ))}
           </AnimatePresence>
         </div>
-        <div className="flex flex-col justify-center items-center text-center gap-8 max-w-lg md:text-left md:items-start">
+        <div className="flex flex-col justify-center items-center text-center gap-8 max-w-lg md:text-left md:items-start" suppressHydrationWarning>
           <motion.div
             key={active}
             initial={{
@@ -98,18 +99,18 @@ export const AnimatedTestimonials = ({
               duration: 0.2,
               ease: "easeInOut",
             }}>
-            <h3 className="text-2xl font-bold text-white">
+            <h3 className="text-2xl font-bold text-white" suppressHydrationWarning>
               {testimonials[active].name}
             </h3>
-            <p className="text-sm text-gray-200 mb-4">
+            <p className="text-sm text-gray-200 mb-4" suppressHydrationWarning>
               {testimonials[active].designation}
             </p>
-            <div className="flex gap-1 justify-center mb-6 md:justify-start">
+            <div className="flex gap-1 justify-center mb-6 md:justify-start" suppressHydrationWarning>
               {[...Array(5)].map((_, i) => (
                 <IconStarFilled key={i} className="w-5 h-5 text-yellow-400" />
               ))}
             </div>
-            <motion.p className="text-lg text-white">
+            <motion.p className="text-lg text-white" suppressHydrationWarning>
               {testimonials[active].quote.split(" ").map((word, index) => (
                 <motion.span
                   key={index}

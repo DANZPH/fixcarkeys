@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import logo from '@/assets/logo_full.png';
+import { Phone } from 'lucide-react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +31,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav style={{
+    <nav suppressHydrationWarning style={{
       backgroundColor: scrolled ? 'rgba(119, 136, 115, 0.98)' : '#778873',
       padding: '0.75rem 0',
       position: 'fixed',
@@ -101,13 +102,13 @@ export default function Navbar() {
             alignItems: 'center',
             gap: '0.5rem'
           }}>
-            📞 Call Now
+            <Phone size={18} /> Call Now
           </a>
         </div>
       </div>
 
       {isOpen && (
-        <div style={{
+        <div suppressHydrationWarning style={{
           backgroundColor: '#778873',
           padding: '1.5rem',
           display: 'flex',

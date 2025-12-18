@@ -1,12 +1,13 @@
 'use client';
 import Image from 'next/image';
 import logo from '@/assets/logo_full.png';
+import { Phone, MessageCircle } from 'lucide-react';
 
 export default function Footer() {
   const scrollTo = (id) => document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
 
   return (
-    <footer style={{
+    <footer suppressHydrationWarning style={{
       backgroundColor: '#778873',
       color: '#F1F3E0',
       padding: '60px 0 30px'
@@ -53,8 +54,12 @@ export default function Footer() {
           <div>
             <h4 style={{ marginBottom: '1.25rem', fontWeight: '600' }}>Contact</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', opacity: 0.9, fontSize: '0.95rem' }}>
-              <a href="tel:07444125447" style={{ color: '#D2DCB6', textDecoration: 'none' }}>📞 07444 125447</a>
-              <a href="https://wa.me/447444125447" target="_blank" rel="noopener noreferrer" style={{ color: '#D2DCB6', textDecoration: 'none' }}>💬 WhatsApp</a>
+              <a href="tel:07444125447" style={{ color: '#D2DCB6', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <Phone size={16} /> 07444 125447
+              </a>
+              <a href="https://wa.me/447444125447" target="_blank" rel="noopener noreferrer" style={{ color: '#D2DCB6', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <MessageCircle size={16} /> WhatsApp
+              </a>
             </div>
             <h4 style={{ marginTop: '1.5rem', marginBottom: '1rem', fontWeight: '600' }}>Follow Us</h4>
             <div style={{ display: 'flex', gap: '1rem' }}>
@@ -99,7 +104,14 @@ export default function Footer() {
           fontSize: '0.9rem'
         }}>
           <p>© 2024 FixCarKeys. All rights reserved.</p>
-          <p>Mobile Auto Locksmith - UK</p>
+          <p style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            Mobile Auto Locksmith - UK
+            <img
+              src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg"
+              alt="UK Flag"
+              style={{ width: '20px', height: 'auto', borderRadius: '2px', display: 'inline-block' }}
+            />
+          </p>
         </div>
       </div>
     </footer>

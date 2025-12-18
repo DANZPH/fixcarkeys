@@ -3,10 +3,14 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+import { motion, AnimatePresence } from 'framer-motion';
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { FocusCards } from "@/components/ui/focus-cards";
 import { LayoutTextFlip } from "@/components/ui/TextFlip";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
+import { LogoMarquee } from "@/components/ui/LogoMarquee";
+import { BlogCarousel } from "@/components/ui/BlogCarousel";
+import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import keyCuttingImg from '@/assets/key_cutting_service.png';
 import keyProgrammingImg from '@/assets/key_programming_service.png';
 import remoteKeyFobImg from '@/assets/remote_key_fob_service.png';
@@ -18,8 +22,8 @@ function AreasSection({ areas }) {
   const [openIndex, setOpenIndex] = useState(null);
 
   return (
-    <section id="areas" style={{ padding: '100px 0', backgroundColor: '#F1F3E0' }}>
-      <div className="container reveal-on-scroll">
+    <section id="areas" suppressHydrationWarning style={{ paddingTop: '100px', paddingBottom: '100px', backgroundColor: '#F1F3E0' }}>
+      <div className="container reveal-on-scroll" suppressHydrationWarning>
         <h2 className="section-title">Areas We Cover</h2>
         <p className="section-subtitle">Mobile car key services across the North West UK</p>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'start' }}>
@@ -42,7 +46,9 @@ function AreasSection({ areas }) {
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     backgroundColor: 'white',
-                    border: 'none',
+                    borderTop: 'none',
+                    borderRight: 'none',
+                    borderLeft: 'none',
                     borderBottom: openIndex === i ? '1px solid #eee' : 'none',
                     cursor: 'pointer',
                     fontSize: '0.9rem',
@@ -50,6 +56,7 @@ function AreasSection({ areas }) {
                     color: '#778873',
                     textAlign: 'left'
                   }}
+                  suppressHydrationWarning
                 >
                   <span style={{ textDecoration: 'underline' }}>{area.name}</span>
                   <span style={{
@@ -155,18 +162,24 @@ const services = [
 ];
 
 const brands = [
-  { name: 'BMW', desc: 'Comfort access & digital keys', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/44/BMW.svg' },
+  { name: 'BMW', desc: 'Comfort access & digital keys', logo: 'https://cdn.simpleicons.org/bmw' },
   { name: 'Mercedes-Benz', desc: 'Smart keys & keyless go', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg' },
-  { name: 'Audi', desc: 'Advanced key systems', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/92/Audi-Logo_2016.svg' },
-  { name: 'Volkswagen', desc: 'Transponder & remote keys', logo: 'https://upload.wikimedia.org/wikipedia/commons/6/6d/Volkswagen_logo_2019.svg' },
-  { name: 'Toyota', desc: 'Smart keys & remotes', logo: 'https://upload.wikimedia.org/wikipedia/commons/e/e7/Toyota.svg' },
-  { name: 'Honda', desc: 'Key fobs & smart entry', logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Honda_Logo.svg' },
-  { name: 'Ford', desc: 'Intelligent access keys', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Ford_Motor_Company_Logo.svg' },
-  { name: 'Nissan', desc: 'Intelligent keys', logo: 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Nissan_2020_logo.svg' },
-  { name: 'Chevrolet', desc: 'Keyless entry systems', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/1f/Chevrolet_logo.svg' },
-  { name: 'Hyundai', desc: 'Smart keys & proximity', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Hyundai_Motor_Company_logo.svg' },
-  { name: 'Kia', desc: 'Smart key programming', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/13/Kia-logo.svg' },
+  { name: 'Audi', desc: 'Advanced key systems', logo: 'https://cdn.simpleicons.org/audi' },
+  { name: 'Volkswagen', desc: 'Transponder & remote keys', logo: 'https://cdn.simpleicons.org/volkswagen' },
+  { name: 'Toyota', desc: 'Smart keys & remotes', logo: 'https://cdn.simpleicons.org/toyota' },
+  { name: 'Honda', desc: 'Key fobs & smart entry', logo: 'https://cdn.simpleicons.org/honda' },
+  { name: 'Ford', desc: 'Intelligent access keys', logo: 'https://cdn.simpleicons.org/ford' },
+  { name: 'Nissan', desc: 'Intelligent keys', logo: 'https://cdn.simpleicons.org/nissan' },
+  { name: 'Land Rover', desc: 'Active key & remotes', logo: 'https://upload.wikimedia.org/wikipedia/en/b/b5/Land_Rover_logo.svg' },
+  { name: 'Jaguar', desc: 'Smart key solutions', logo: 'https://cdn.simpleicons.org/jaguar' },
+  { name: 'Vauxhall', desc: 'Remote & flip keys', logo: 'https://cdn.simpleicons.org/vauxhall' },
+  { name: 'Volvo', desc: 'Smart entry programming', logo: 'https://cdn.simpleicons.org/volvo' },
+  { name: 'Peugeot', desc: 'Electronic key fobs', logo: 'https://cdn.simpleicons.org/peugeot' },
+  { name: 'Renault', desc: 'Hands-free key cards', logo: 'https://cdn.simpleicons.org/renault' },
+  { name: 'Hyundai', desc: 'Smart keys & proximity', logo: 'https://cdn.simpleicons.org/hyundai' },
+  { name: 'Kia', desc: 'Smart key programming', logo: 'https://cdn.simpleicons.org/kia' },
   { name: 'Lexus', desc: 'Smart access keys', logo: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Lexus_division_emblem.svg' },
+  { name: 'Mazda', desc: 'Advanced keyless entry', logo: 'https://cdn.simpleicons.org/mazda' },
 ];
 
 const areas = [
@@ -216,13 +229,15 @@ const reviews = [
 ];
 
 const blogPosts = [
-  { title: 'What to Do When You Lose Your Car Keys', excerpt: 'Don\'t panic. Here\'s a comprehensive step-by-step guide to help you through this stressful situation.', category: 'Tips' },
-  { title: 'Transponder Keys Explained', excerpt: 'Learn how transponder keys work, why they\'re important for security, and what to do if yours fails.', category: 'Education' },
-  { title: 'Smart Key vs Traditional Key', excerpt: 'A detailed comparison of smart keys and traditional keys to help you understand the pros and cons.', category: 'Comparison' },
-  { title: 'Car Key Battery Replacement', excerpt: 'A simple DIY guide to replacing the battery in your car key fob and extending its life.', category: 'DIY' },
+  { title: "LOCKED KEYS IN CAR? HERE'S WHAT YOU NEED TO DO", excerpt: "Locked Keys in Car? Here's What to Do Next Getting locked out of your car is frustrating, but it happens...", category: 'Locksmith in UK' },
+  { title: "IGNITION BARREL PROBLEMS? HERE'S EVERYTHING YOU NEED TO KNOW", excerpt: "Ignition Barrel Problems? Here's Everything You Need to Know Why Won't My Car Key Turn In the Ignition? Causes &...", category: 'Uncategorized' },
+  { title: "SMART CAR KEYS: EVERYTHING YOU NEED TO KNOW", excerpt: "Smart Car Keys: Everything You Need to Know What Are Smart Car Keys and How Do They Work?Smart car keys,...", category: 'Uncategorized' },
+  { title: "SPARE CAR KEYS", excerpt: "Spare Car Keys: How FixCarKeys Can Help You Save Time and Money When it comes to car ownership, having a...", category: 'Locksmith in UK' },
+  { title: "TIME IS MONEY: HOW FIXCARKEYS SAVES YOU BOTH TIME AND MONEY", excerpt: "Time Is Money: How FixCarKeys Saves You Both Time and Money Time Is Money: How FixCarKeys Saves You Both Time...", category: 'Locksmith in UK' },
 ];
 
 export default function Home() {
+  const [showContactModal, setShowContactModal] = useState(false);
   const scrollTo = (id) => document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
 
   return (
@@ -297,20 +312,22 @@ export default function Home() {
                 programming, and replacement services for all vehicle makes and models.
               </p>
               <div className="hero-buttons" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '3rem' }}>
-                <a href="#contact" onClick={(e) => { e.preventDefault(); scrollTo('#contact'); }}
+                <button
+                  onClick={() => setShowContactModal(true)}
                   style={{
                     backgroundColor: '#F1F3E0',
                     color: '#778873',
                     padding: '16px 32px',
                     borderRadius: '10px',
-                    textDecoration: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
                     fontWeight: '600',
                     fontSize: '1.05rem',
                     transition: 'all 0.3s ease',
                     boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
                   }}>
-                  Get a Free Quote →
-                </a>
+                  Contact →
+                </button>
                 <a href="#services" onClick={(e) => { e.preventDefault(); scrollTo('#services'); }}
                   style={{
                     border: '2px solid rgba(255,255,255,0.8)',
@@ -395,176 +412,107 @@ export default function Home() {
       </section>
 
       {/* Car Brands Section */}
-      <section id="car-brands" style={{
-        padding: '60px 0',
-        background: 'linear-gradient(135deg, #778873 0%, #A1BC98 50%, #D2DCB6 100%)',
+      <section id="car-brands" suppressHydrationWarning style={{
+        paddingTop: '100px',
+        paddingBottom: '100px',
+        backgroundImage: 'linear-gradient(135deg, #778873 0%, #A1BC98 50%, #D2DCB6 100%)',
         position: 'relative',
         overflow: 'hidden'
       }}>
         {/* Decorative background elements */}
-        <div style={{
+        <div suppressHydrationWarning style={{
           position: 'absolute',
-          top: '-50%',
-          left: '-10%',
-          width: '300px',
-          height: '300px',
+          top: '-10%',
+          right: '5%',
+          width: '500px',
+          height: '500px',
           borderRadius: '50%',
-          background: 'rgba(255,255,255,0.05)',
-          filter: 'blur(60px)'
+          backgroundColor: 'rgba(255,255,255,0.03)',
+          filter: 'blur(80px)',
+          zIndex: 0
         }} />
-        <div style={{
+        <div suppressHydrationWarning style={{
           position: 'absolute',
-          bottom: '-30%',
-          right: '-5%',
-          width: '200px',
-          height: '200px',
+          bottom: '-10%',
+          left: '5%',
+          width: '400px',
+          height: '400px',
           borderRadius: '50%',
-          background: 'rgba(255,255,255,0.08)',
-          filter: 'blur(40px)'
+          backgroundColor: 'rgba(255,255,255,0.05)',
+          filter: 'blur(60px)',
+          zIndex: 0
         }} />
 
-        <div className="container reveal-on-scroll" style={{ position: 'relative', zIndex: 1 }}>
-          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+        <div className="reveal-on-scroll" suppressHydrationWarning style={{ position: 'relative', zIndex: 1 }}>
+          <div suppressHydrationWarning style={{ textAlign: 'center', marginBottom: '4rem' }} className="container">
             <span style={{
               display: 'inline-block',
               backgroundColor: 'rgba(255,255,255,0.2)',
               backdropFilter: 'blur(10px)',
               color: 'white',
-              padding: '6px 14px',
+              padding: '8px 20px',
               borderRadius: '50px',
-              fontSize: '0.75rem',
-              fontWeight: '500',
-              marginBottom: '0.75rem',
-              border: '1px solid rgba(255,255,255,0.3)'
+              fontSize: '0.85rem',
+              fontWeight: '600',
+              marginBottom: '1rem',
+              border: '1px solid rgba(255,255,255,0.3)',
+              textTransform: 'uppercase',
+              letterSpacing: '1px'
             }}>
-              🚗 All Major Manufacturers
+              Certified Brand Specialists
             </span>
             <h2 style={{
-              fontSize: '2rem',
+              fontSize: '3.5rem',
               color: 'white',
-              marginBottom: '0.5rem',
-              fontWeight: '700',
-              letterSpacing: '-0.5px'
+              marginBottom: '1rem',
+              fontWeight: '800',
+              letterSpacing: '-1.5px',
+              lineHeight: 1.1
             }}>Car Brands We Service</h2>
             <p style={{
               color: 'rgba(255,255,255,0.9)',
-              fontSize: '0.95rem',
-              maxWidth: '400px',
+              fontSize: '1.25rem',
+              maxWidth: '600px',
               margin: '0 auto'
-            }}>Expert key services for all major manufacturers</p>
+            }}>We carry the latest diagnostic equipment and key blanks for over 60 manufacturers.</p>
           </div>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(6, 1fr)',
-            gap: '0.875rem'
-          }}>
-            {brands.map((brand, i) => (
-              <div key={i} className="card" style={{
-                backgroundColor: 'rgba(255,255,255,0.95)',
-                backdropFilter: 'blur(20px)',
-                padding: '1rem 0.75rem',
-                borderRadius: '12px',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
-                border: '1px solid rgba(255,255,255,0.2)',
-                textAlign: 'center',
-                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                cursor: 'pointer',
-                position: 'relative',
-                overflow: 'hidden'
-              }}>
-                {/* Gradient overlay on hover effect */}
-                <div style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: '3px',
-                  background: 'linear-gradient(90deg, #778873, #A1BC98, #D2DCB6)',
-                  borderRadius: '12px 12px 0 0'
-                }} />
-
-                {/* Logo container */}
-                <div style={{
-                  width: '48px',
-                  height: '48px',
-                  margin: '0 auto 0.6rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: '#f8f9fa',
-                  borderRadius: '10px',
-                  padding: '8px',
-                  transition: 'all 0.3s ease'
-                }}>
-                  <img
-                    src={brand.logo}
-                    alt={`${brand.name} logo`}
-                    style={{
-                      maxWidth: '100%',
-                      maxHeight: '100%',
-                      objectFit: 'contain',
-                      filter: 'grayscale(0%)',
-                      transition: 'all 0.3s ease'
-                    }}
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'flex';
-                    }}
-                  />
-                  <div style={{
-                    display: 'none',
-                    width: '100%',
-                    height: '100%',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '1.25rem',
-                    fontWeight: '700',
-                    color: '#778873',
-                    background: 'linear-gradient(135deg, #778873, #A1BC98)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent'
-                  }}>
-                    {brand.name.charAt(0)}
-                  </div>
-                </div>
-
-                <h3 style={{
-                  color: '#778873',
-                  marginBottom: '0.2rem',
-                  fontSize: '0.85rem',
-                  fontWeight: '600',
-                  letterSpacing: '-0.2px'
-                }}>{brand.name}</h3>
-                <p style={{
-                  color: '#888',
-                  fontSize: '0.7rem',
-                  margin: 0,
-                  lineHeight: 1.3
-                }}>{brand.desc}</p>
-              </div>
-            ))}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0px' }}>
+            <LogoMarquee items={brands.slice(0, 9)} speed={50} direction="left" suppressHydrationWarning />
+            <LogoMarquee items={brands.slice(9)} speed={60} direction="right" suppressHydrationWarning />
           </div>
 
-          {/* Bottom CTA - Inline */}
-          <p style={{
-            textAlign: 'center',
-            marginTop: '1.5rem',
-            color: 'rgba(255,255,255,0.95)',
-            fontSize: '0.9rem'
-          }}>
-            Don't see your brand? <a
-              href="#contact"
-              onClick={(e) => { e.preventDefault(); scrollTo('#contact'); }}
-              style={{
+          <div className="container" style={{ marginTop: '3rem' }}>
+            <div style={{
+              backgroundColor: 'rgba(255,255,255,0.1)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: '24px',
+              padding: '2rem',
+              border: '1px solid rgba(255,255,255,0.2)',
+              textAlign: 'center'
+            }}>
+              <p style={{
                 color: 'white',
-                fontWeight: '600',
-                textDecoration: 'underline'
-              }}
-            >Contact us</a> — we service virtually all makes and models!
-          </p>
+                fontSize: '1.1rem',
+                margin: 0,
+                fontWeight: '500'
+              }}>
+                Don't see your brand? <a
+                  href="#contact"
+                  onClick={(e) => { e.preventDefault(); scrollTo('#contact'); }}
+                  style={{
+                    color: 'white',
+                    fontWeight: '700',
+                    textDecoration: 'underline',
+                    textUnderlineOffset: '4px'
+                  }}
+                >Contact us</a> — we service 99% of vehicles on the road today!
+              </p>
+            </div>
+          </div>
         </div>
       </section>
+
 
       {/* Areas Section */}
       <AreasSection areas={areas} />
@@ -586,40 +534,8 @@ export default function Home() {
         <div className="container reveal-on-scroll">
           <h2 className="section-title">Tips & Resources</h2>
           <p className="section-subtitle">Helpful articles about car keys and locksmith services</p>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '1.5rem'
-          }}>
-            {blogPosts.map((post, i) => (
-              <article key={i} className="card" style={{
-                backgroundColor: 'white',
-                borderRadius: '16px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 15px rgba(0,0,0,0.06)'
-              }}>
-                <div style={{
-                  backgroundColor: '#A1BC98',
-                  height: '140px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '3rem'
-                }}>🔑</div>
-                <div style={{ padding: '1.5rem' }}>
-                  <span style={{
-                    backgroundColor: '#D2DCB6',
-                    color: '#778873',
-                    padding: '4px 12px',
-                    borderRadius: '20px',
-                    fontSize: '0.75rem',
-                    fontWeight: '600'
-                  }}>{post.category}</span>
-                  <h3 style={{ color: '#778873', fontSize: '1.05rem', margin: '0.75rem 0 0.5rem', fontWeight: '600', lineHeight: 1.4 }}>{post.title}</h3>
-                  <p style={{ color: '#666', fontSize: '0.9rem', margin: 0, lineHeight: 1.6 }}>{post.excerpt}</p>
-                </div>
-              </article>
-            ))}
+          <div style={{ marginTop: '2rem' }}>
+            <BlogCarousel posts={blogPosts} />
           </div>
         </div>
       </section>
@@ -700,25 +616,31 @@ export default function Home() {
               }}>Send Message →</button>
             </form>
             <div style={{ color: 'white' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {[
-                  { icon: '📞', title: 'Phone', info: '[phone_number]', sub: '24/7 Emergency Line Available' },
-                  { icon: '✉️', title: 'Email', info: '[email]', sub: 'We reply within 24 hours' },
-                  { icon: '📍', title: 'Location', info: '[address]', sub: 'Mobile service available' },
-                  { icon: '⏰', title: 'Hours', info: 'Mon-Fri: 8am-6pm', sub: 'Sat: 9am-4pm • Sun: Emergency' }
+                  { icon: <Phone size={24} />, title: 'Phone', info: '[phone_number]', sub: '24/7 Emergency Line Available' },
+                  { icon: <Mail size={24} />, title: 'Email', info: '[email]', sub: 'We reply within 24 hours' },
+                  { icon: <MapPin size={24} />, title: 'Location', info: '[address]', sub: 'Mobile service available' },
+                  { icon: <Clock size={24} />, title: 'Hours', info: 'Mon-Sun: 24/7', sub: 'Emergency availability' }
                 ].map((item, i) => (
-                  <div key={i} style={{
+                  <div key={`${item.title}-${i}`} suppressHydrationWarning style={{
                     backgroundColor: 'rgba(255,255,255,0.15)',
-                    padding: '1.5rem',
+                    padding: '1rem 1.25rem',
                     borderRadius: '12px',
                     backdropFilter: 'blur(10px)'
                   }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                      <span style={{ fontSize: '1.75rem' }}>{item.icon}</span>
-                      <div>
-                        <h3 style={{ marginBottom: '0.25rem', fontSize: '1.1rem' }}>{item.title}</h3>
-                        <p style={{ margin: 0, fontWeight: '500' }}>{item.info}</p>
-                        <p style={{ margin: '0.25rem 0 0', opacity: 0.8, fontSize: '0.85rem' }}>{item.sub}</p>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }} suppressHydrationWarning>
+                      <span style={{
+                        color: 'white',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        opacity: 0.9
+                      }}>{item.icon}</span>
+                      <div suppressHydrationWarning>
+                        <h3 style={{ marginBottom: '0.1rem', fontSize: '1rem' }}>{item.title}</h3>
+                        <p style={{ margin: 0, fontWeight: '500', fontSize: '0.95rem' }}>{item.info}</p>
+                        <p style={{ margin: '0.1rem 0 0', opacity: 0.8, fontSize: '0.8rem' }}>{item.sub}</p>
                       </div>
                     </div>
                   </div>
@@ -728,6 +650,119 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Contact Modal */}
+      <AnimatePresence>
+        {showContactModal && (
+          <div style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px'
+          }}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowContactModal(false)}
+              style={{
+                position: 'absolute',
+                inset: 0,
+                backgroundColor: 'rgba(0,0,0,0.6)',
+                backdropFilter: 'blur(5px)'
+              }}
+            />
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              style={{
+                backgroundColor: 'white',
+                borderRadius: '24px',
+                padding: '2.5rem',
+                width: '100%',
+                maxWidth: '400px',
+                position: 'relative',
+                boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
+                textAlign: 'center'
+              }}
+            >
+              <button
+                onClick={() => setShowContactModal(false)}
+                style={{
+                  position: 'absolute',
+                  top: '1.5rem',
+                  right: '1.5rem',
+                  background: '#f3f4f6',
+                  border: 'none',
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '1.2rem',
+                  color: '#4b5563'
+                }}
+              >✕</button>
+
+              <h3 style={{ fontSize: '1.75rem', fontWeight: '800', color: '#778873', marginBottom: '0.5rem' }}>Get in Touch</h3>
+              <p style={{ color: '#6b7280', marginBottom: '2rem' }}>How would you like to contact us?</p>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <a href="https://wa.me/447444125447" target="_blank" rel="noopener noreferrer" style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.75rem',
+                  backgroundColor: '#25D366',
+                  color: 'white',
+                  padding: '16px',
+                  borderRadius: '12px',
+                  textDecoration: 'none',
+                  fontWeight: '700',
+                  fontSize: '1.1rem',
+                  transition: 'transform 0.2s ease'
+                }}
+                  onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+                  onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></svg>
+                  WhatsApp Us
+                </a>
+
+                <a href="tel:07444125447" style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.75rem',
+                  backgroundColor: '#778873',
+                  color: 'white',
+                  padding: '16px',
+                  borderRadius: '12px',
+                  textDecoration: 'none',
+                  fontWeight: '700',
+                  fontSize: '1.1rem',
+                  transition: 'transform 0.2s ease'
+                }}
+                  onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+                  onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                >
+                  📞 Call 07444 125447
+                </a>
+              </div>
+
+              <p style={{ marginTop: '1.5rem', fontSize: '0.85rem', color: '#9ca3af' }}>
+                Available 24/7 for emergency lockouts.
+              </p>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

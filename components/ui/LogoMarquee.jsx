@@ -51,7 +51,7 @@ export const LogoMarquee = ({ items, speed = 40, direction = 'left', pauseOnHove
                     >
                         <div className="w-14 h-14 mb-2 flex items-center justify-center bg-white rounded-md p-2 group-hover:scale-110 transition-transform duration-300 shadow-sm relative overflow-hidden">
                             <img
-                                src={brand.logo}
+                                src={brand.logo || brand.logo_url}
                                 alt={brand.name}
                                 className="max-w-full max-h-full object-contain"
                                 loading="lazy"

@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -11,12 +11,24 @@ import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { LogoMarquee } from "@/components/ui/LogoMarquee";
 import { BlogCarousel } from "@/components/ui/BlogCarousel";
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
+
+// Import default images as fallbacks
 import keyCuttingImg from '@/assets/key_cutting_service.png';
 import keyProgrammingImg from '@/assets/key_programming_service.png';
 import remoteKeyFobImg from '@/assets/remote_key_fob_service.png';
 import keyReplacementImg from '@/assets/key_replacement_service.png';
 import emergencyLockoutImg from '@/assets/emergency_lockout_service.png';
 import ignitionRepairImg from '@/assets/ignition_repair_service.png';
+
+// Default fallback images mapping
+const defaultServiceImages = {
+  'Key Cutting': keyCuttingImg.src,
+  'Key Programming': keyProgrammingImg.src,
+  'Remote Key Fob': remoteKeyFobImg.src,
+  'Key Replacement': keyReplacementImg.src,
+  'Emergency Lockout': emergencyLockoutImg.src,
+  'Ignition Repair': ignitionRepairImg.src,
+};
 
 function AreasSection({ areas }) {
   const [openIndex, setOpenIndex] = useState(null);
@@ -30,7 +42,7 @@ function AreasSection({ areas }) {
           {/* Accordion List */}
           <div>
             {areas.map((area, i) => (
-              <div key={i} style={{
+              <div key={area.id || i} style={{
                 backgroundColor: 'white',
                 marginBottom: '0.25rem',
                 borderRadius: '6px',
@@ -69,7 +81,7 @@ function AreasSection({ areas }) {
                 {openIndex === i && (
                   <div style={{ padding: '1rem 1.25rem', backgroundColor: '#fafafa' }}>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                      {area.towns.map((town, j) => (
+                      {(area.towns || []).map((town, j) => (
                         <span key={j} style={{
                           backgroundColor: '#D2DCB6',
                           color: '#778873',
@@ -116,129 +128,76 @@ function AreasSection({ areas }) {
   );
 }
 
-const services = [
-  {
-    icon: '🔑',
-    title: 'Key Cutting',
-    desc: 'Precision key cutting for all vehicle types including standard, laser-cut, and high-security keys.',
-    features: ['All key types', 'On-site service', 'Same-day completion'],
-    src: keyCuttingImg.src
-  },
-  {
-    icon: '💻',
-    title: 'Key Programming',
-    desc: 'Expert transponder and smart key programming for modern vehicles with advanced security.',
-    features: ['Transponder keys', 'Smart keys', 'Remote fobs'],
-    src: keyProgrammingImg.src
-  },
-  {
-    icon: '🔄',
-    title: 'Key Replacement',
-    desc: 'Complete key replacement solutions when you\'ve lost all your keys or need extras.',
-    features: ['All makes & models', 'OEM quality', 'Warranty included'],
-    src: keyReplacementImg.src
-  },
-  {
-    icon: '🚗',
-    title: 'Emergency Lockout',
-    desc: '24/7 emergency lockout assistance to get you back on the road quickly and safely.',
-    features: ['24/7 availability', 'Fast response', 'No damage entry'],
-    src: emergencyLockoutImg.src
-  },
-  {
-    icon: '🔧',
-    title: 'Ignition Repair',
-    desc: 'Professional ignition cylinder repair and replacement services for all vehicles.',
-    features: ['Diagnosis', 'Repair', 'Full replacement'],
-    src: ignitionRepairImg.src
-  },
-  {
-    icon: '📱',
-    title: 'Remote Key Fob',
-    desc: 'Remote key fob programming, repair, and battery replacement services.',
-    features: ['Programming', 'Battery swap', 'Shell replacement'],
-    src: remoteKeyFobImg.src
-  },
-];
-
-const brands = [
-  { name: 'BMW', desc: 'Comfort access & digital keys', logo: 'https://cdn.simpleicons.org/bmw' },
-  { name: 'Mercedes-Benz', desc: 'Smart keys & keyless go', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg' },
-  { name: 'Audi', desc: 'Advanced key systems', logo: 'https://cdn.simpleicons.org/audi' },
-  { name: 'Volkswagen', desc: 'Transponder & remote keys', logo: 'https://cdn.simpleicons.org/volkswagen' },
-  { name: 'Toyota', desc: 'Smart keys & remotes', logo: 'https://cdn.simpleicons.org/toyota' },
-  { name: 'Honda', desc: 'Key fobs & smart entry', logo: 'https://cdn.simpleicons.org/honda' },
-  { name: 'Ford', desc: 'Intelligent access keys', logo: 'https://cdn.simpleicons.org/ford' },
-  { name: 'Nissan', desc: 'Intelligent keys', logo: 'https://cdn.simpleicons.org/nissan' },
-  { name: 'Land Rover', desc: 'Active key & remotes', logo: 'https://upload.wikimedia.org/wikipedia/en/b/b5/Land_Rover_logo.svg' },
-  { name: 'Jaguar', desc: 'Smart key solutions', logo: 'https://cdn.simpleicons.org/jaguar' },
-  { name: 'Vauxhall', desc: 'Remote & flip keys', logo: 'https://cdn.simpleicons.org/vauxhall' },
-  { name: 'Volvo', desc: 'Smart entry programming', logo: 'https://cdn.simpleicons.org/volvo' },
-  { name: 'Peugeot', desc: 'Electronic key fobs', logo: 'https://cdn.simpleicons.org/peugeot' },
-  { name: 'Renault', desc: 'Hands-free key cards', logo: 'https://cdn.simpleicons.org/renault' },
-  { name: 'Hyundai', desc: 'Smart keys & proximity', logo: 'https://cdn.simpleicons.org/hyundai' },
-  { name: 'Kia', desc: 'Smart key programming', logo: 'https://cdn.simpleicons.org/kia' },
-  { name: 'Lexus', desc: 'Smart access keys', logo: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Lexus_division_emblem.svg' },
-  { name: 'Mazda', desc: 'Advanced keyless entry', logo: 'https://cdn.simpleicons.org/mazda' },
-];
-
-const areas = [
-  { name: 'Wigan', towns: ['Wigan Town Centre', 'Ashton-in-Makerfield', 'Leigh', 'Standish', 'Hindley'] },
-  { name: 'Warrington', towns: ['Warrington Town Centre', 'Lymm', 'Culcheth', 'Birchwood', 'Padgate'] },
-  { name: 'Bolton', towns: ['Bolton Town Centre', 'Horwich', 'Farnworth', 'Westhoughton', 'Bromley Cross'] },
-  { name: 'Liverpool', towns: ['Liverpool City Centre', 'Anfield', 'Wavertree', 'Woolton', 'Crosby'] },
-  { name: 'Manchester', towns: ['Manchester City Centre', 'Salford', 'Trafford', 'Didsbury', 'Chorlton'] },
-  { name: 'Stoke-on-Trent', towns: ['Hanley', 'Stoke', 'Burslem', 'Tunstall', 'Longton'] },
-  { name: 'Chester & Ellesmere Port', towns: ['Chester City Centre', 'Ellesmere Port', 'Neston', 'Hoole', 'Blacon'] },
-  { name: 'Southport & Chorley', towns: ['Southport Town Centre', 'Chorley', 'Formby', 'Ormskirk', 'Leyland'] },
-  { name: 'Skelmersdale & Ormskirk', towns: ['Skelmersdale', 'Ormskirk', 'Burscough', 'Aughton', 'Rainford'] },
-];
-
-
-const reviews = [
-  {
-    quote: "Absolutely spot on. Needed a spare key for my VW, got a very competitive quote, arrived first thing the next morning. Less than half an hour and all done. Key looks and works superb. Quick, great price & polite. Couldn’t ask for more.",
-    name: "Nicholas Watkins",
-    designation: "VW Owner",
-    src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  },
-  {
-    quote: "Couldn’t have rang a better locksmith. Narcis answered the phone call straight away and arrived within the hour. He had great communication and knowledge and had my van unlocked within 30 minutes. Very nice and friendly guy, highly, highly recommend. Also very fair with his prices.",
-    name: "Mathew Tait",
-    designation: "Van Owner",
-    src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  },
-  {
-    quote: "Car battery was dead and the manual lock wouldn't work. He came out within 2 hours and fixed it now problem. Even gave advise to stop it from happening again. Reasonably priced too, especially for a Sunday morning. Absolutely brilliant, thank you so much for you help. Couldn't recommend enough.",
-    name: "Karen Berrey",
-    designation: "Verified Customer",
-    src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  },
-  {
-    quote: "He is very honest and sincere. I called him for my faulty Ford S-Max car key fob. He came at the given ETA. Fix the issue promptly. I will be happy to recommend him to anyone who needs his services.",
-    name: "Harry Ade",
-    designation: "Ford Owner",
-    src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  },
-  {
-    quote: "Had a car key broken which I couldn't repair after battery replacement. Messaged company arrived at my home 30 mins later and repaired key. Happy with service and price. Recommended",
-    name: "Ian The Monk",
-    designation: "Local Guide",
-    src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  },
-];
-
-const blogPosts = [
-  { title: "LOCKED KEYS IN CAR? HERE'S WHAT YOU NEED TO DO", excerpt: "Locked Keys in Car? Here's What to Do Next Getting locked out of your car is frustrating, but it happens...", category: 'Locksmith in UK' },
-  { title: "IGNITION BARREL PROBLEMS? HERE'S EVERYTHING YOU NEED TO KNOW", excerpt: "Ignition Barrel Problems? Here's Everything You Need to Know Why Won't My Car Key Turn In the Ignition? Causes &...", category: 'Uncategorized' },
-  { title: "SMART CAR KEYS: EVERYTHING YOU NEED TO KNOW", excerpt: "Smart Car Keys: Everything You Need to Know What Are Smart Car Keys and How Do They Work?Smart car keys,...", category: 'Uncategorized' },
-  { title: "SPARE CAR KEYS", excerpt: "Spare Car Keys: How FixCarKeys Can Help You Save Time and Money When it comes to car ownership, having a...", category: 'Locksmith in UK' },
-  { title: "TIME IS MONEY: HOW FIXCARKEYS SAVES YOU BOTH TIME AND MONEY", excerpt: "Time Is Money: How FixCarKeys Saves You Both Time and Money Time Is Money: How FixCarKeys Saves You Both Time...", category: 'Locksmith in UK' },
-];
-
 export default function Home() {
   const [showContactModal, setShowContactModal] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [content, setContent] = useState({
+    settings: {},
+    services: [],
+    testimonials: [],
+    brands: [],
+    areas: [],
+    blogPosts: []
+  });
+
+  useEffect(() => {
+    fetchContent();
+  }, []);
+
+  const fetchContent = async () => {
+    try {
+      const res = await fetch('/api/content');
+      if (res.ok) {
+        const data = await res.json();
+        setContent(data);
+      }
+    } catch (error) {
+      console.error('Failed to fetch content:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const scrollTo = (id) => document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
+
+  const { settings, services, testimonials, brands, areas, blogPosts } = content;
+
+  // Process services for FocusCards
+  const processedServices = services.map(service => ({
+    ...service,
+    src: service.image_url || defaultServiceImages[service.title] || keyCuttingImg.src,
+    desc: service.description,
+  }));
+
+  // Process testimonials for AnimatedTestimonials
+  const processedTestimonials = testimonials.map(t => ({
+    name: t.name,
+    designation: t.designation,
+    quote: t.quote,
+    src: t.image_url || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop'
+  }));
+
+  // Get phone number for contact
+  const phoneNumber = settings.phone_number || '07444 125447';
+  const whatsappNumber = settings.whatsapp_number || '447444125447';
+  const heroVideoUrl = settings.hero_video_url || '/assets/Car_Moving_Video.mp4';
+
+  if (loading) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(135deg, #778873 0%, #A1BC98 50%, #D2DCB6 100%)'
+      }}>
+        <div style={{ textAlign: 'center', color: 'white' }}>
+          <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🔑</div>
+          <p style={{ fontSize: '1.1rem', opacity: 0.9 }}>Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -285,7 +244,7 @@ export default function Home() {
                 textShadow: '0 2px 10px rgba(0,0,0,0.1)'
               }}>
                 <LayoutTextFlip
-                  staticText="Fix"
+                  staticText='Fix'
                   flipWords={['CarKeys', 'AutoKeys', 'Keys', 'Fobs']}
                   interval={2500}
                 />
@@ -308,8 +267,7 @@ export default function Home() {
                 lineHeight: 1.7,
                 maxWidth: '600px'
               }}>
-                Lost your car keys? Need a spare? We provide fast, reliable car key cutting,
-                programming, and replacement services for all vehicle makes and models.
+                Lost your car keys? Need a spare? We provide fast, reliable car key cutting, programming, and replacement services for all vehicle makes and models.
               </p>
               <div className="hero-buttons" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '3rem' }}>
                 <button
@@ -351,21 +309,33 @@ export default function Home() {
               }}>
                 <div>
                   <div style={{ fontSize: '2rem', fontWeight: '700' }}>
-                    <AnimatedCounter end={24} duration={1500} suffix="/7" />
+                    <AnimatedCounter
+                      end={parseInt(settings.hero_stat_1_value) || 24}
+                      duration={1500}
+                      suffix={settings.hero_stat_1_value?.includes('/') ? '/7' : ''}
+                    />
                   </div>
-                  <div style={{ opacity: 0.85, fontSize: '0.9rem' }}>Emergency Service</div>
+                  <div style={{ opacity: 0.85, fontSize: '0.9rem' }}>{settings.hero_stat_1_label || 'Emergency Service'}</div>
                 </div>
                 <div>
                   <div style={{ fontSize: '2rem', fontWeight: '700' }}>
-                    <AnimatedCounter end={15} duration={1800} suffix="+" />
+                    <AnimatedCounter
+                      end={parseInt(settings.hero_stat_2_value) || 15}
+                      duration={1800}
+                      suffix={settings.hero_stat_2_value?.includes('+') ? '+' : ''}
+                    />
                   </div>
-                  <div style={{ opacity: 0.85, fontSize: '0.9rem' }}>Years Experience</div>
+                  <div style={{ opacity: 0.85, fontSize: '0.9rem' }}>{settings.hero_stat_2_label || 'Years Experience'}</div>
                 </div>
                 <div>
                   <div style={{ fontSize: '2rem', fontWeight: '700' }}>
-                    <AnimatedCounter end={100} duration={2000} suffix="%" />
+                    <AnimatedCounter
+                      end={parseInt(settings.hero_stat_3_value) || 100}
+                      duration={2000}
+                      suffix={settings.hero_stat_3_value?.includes('%') ? '%' : ''}
+                    />
                   </div>
-                  <div style={{ opacity: 0.85, fontSize: '0.9rem' }}>Satisfaction</div>
+                  <div style={{ opacity: 0.85, fontSize: '0.9rem' }}>{settings.hero_stat_3_label || 'Satisfaction'}</div>
                 </div>
               </div>
             </div>
@@ -391,7 +361,7 @@ export default function Home() {
                   playsInline
                   style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
                 >
-                  <source src="/assets/Car_Moving_Video.mp4" type="video/mp4" />
+                  <source src={heroVideoUrl} type="video/mp4" />
                 </video>
               </div>
             </div>
@@ -406,7 +376,7 @@ export default function Home() {
           <h2 className="section-title">Our Services</h2>
           <p className="section-subtitle">Professional car key solutions tailored to your needs</p>
           <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center' }}>
-            <FocusCards cards={services} />
+            <FocusCards cards={processedServices} />
           </div>
         </div>
       </section>
@@ -478,8 +448,8 @@ export default function Home() {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0px' }}>
-            <LogoMarquee items={brands.slice(0, 9)} speed={50} direction="left" suppressHydrationWarning />
-            <LogoMarquee items={brands.slice(9)} speed={60} direction="right" suppressHydrationWarning />
+            <LogoMarquee items={brands.slice(0, Math.ceil(brands.length / 2))} speed={50} direction="left" suppressHydrationWarning />
+            <LogoMarquee items={brands.slice(Math.ceil(brands.length / 2))} speed={60} direction="right" suppressHydrationWarning />
           </div>
 
           <div className="container" style={{ marginTop: '3rem' }}>
@@ -524,8 +494,9 @@ export default function Home() {
           <h2 className="section-title" style={{ color: 'white' }}>What Our Customers Say</h2>
           <p className="section-subtitle" style={{ color: 'rgba(255,255,255,0.85)' }}>Real reviews from real customers</p>
 
-
-          <AnimatedTestimonials testimonials={reviews} />
+          {processedTestimonials.length > 0 && (
+            <AnimatedTestimonials testimonials={processedTestimonials} />
+          )}
         </div>
       </section>
 
@@ -587,11 +558,9 @@ export default function Home() {
                 boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
               }}>
                 <option value="">Select a Service</option>
-                <option>Key Cutting</option>
-                <option>Key Programming</option>
-                <option>Key Replacement</option>
-                <option>Emergency Lockout</option>
-                <option>Other</option>
+                {services.map((s, i) => (
+                  <option key={i}>{s.title}</option>
+                ))}
               </select>
               <textarea placeholder="Tell us about your needs..." rows={4} style={{
                 padding: '16px 20px',
@@ -618,10 +587,10 @@ export default function Home() {
             <div style={{ color: 'white' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {[
-                  { icon: <Phone size={24} />, title: 'Phone', info: '[phone_number]', sub: '24/7 Emergency Line Available' },
-                  { icon: <Mail size={24} />, title: 'Email', info: '[email]', sub: 'We reply within 24 hours' },
-                  { icon: <MapPin size={24} />, title: 'Location', info: '[address]', sub: 'Mobile service available' },
-                  { icon: <Clock size={24} />, title: 'Hours', info: 'Mon-Sun: 24/7', sub: 'Emergency availability' }
+                  { icon: <Phone size={24} />, title: 'Phone', info: phoneNumber, sub: '24/7 Emergency Line Available' },
+                  { icon: <Mail size={24} />, title: 'Email', info: settings.email || 'info@fixcarkeys.co.uk', sub: 'We reply within 24 hours' },
+                  { icon: <MapPin size={24} />, title: 'Location', info: settings.address || 'North West England, UK', sub: 'Mobile service available' },
+                  { icon: <Clock size={24} />, title: 'Hours', info: settings.hours || 'Mon-Sun: 24/7', sub: 'Emergency availability' }
                 ].map((item, i) => (
                   <div key={`${item.title}-${i}`} suppressHydrationWarning style={{
                     backgroundColor: 'rgba(255,255,255,0.15)',
@@ -714,7 +683,7 @@ export default function Home() {
               <p style={{ color: '#6b7280', marginBottom: '2rem' }}>How would you like to contact us?</p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <a href="https://wa.me/447444125447" target="_blank" rel="noopener noreferrer" style={{
+                <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -735,7 +704,7 @@ export default function Home() {
                   WhatsApp Us
                 </a>
 
-                <a href="tel:07444125447" style={{
+                <a href={`tel:${phoneNumber.replace(/\s/g, '')}`} style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -752,7 +721,7 @@ export default function Home() {
                   onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
                   onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
                 >
-                  📞 Call 07444 125447
+                  📞 Call {phoneNumber}
                 </a>
               </div>
 

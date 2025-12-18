@@ -100,7 +100,7 @@ export const BlogCarousel = ({ posts }) => {
                             }}
                         >
                             <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col border border-gray-100 hover:-translate-y-1">
-                                {/* Image Placeholder */}
+                                {/* Image Placeholder or Actual Image */}
                                 <div style={{
                                     backgroundColor: '#F1F3E0',
                                     height: '200px', // Increased height
@@ -108,9 +108,18 @@ export const BlogCarousel = ({ posts }) => {
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                     fontSize: '3rem',
-                                    position: 'relative'
+                                    position: 'relative',
+                                    overflow: 'hidden'
                                 }}>
-                                    🔑
+                                    {post.image_url ? (
+                                        <img
+                                            src={post.image_url}
+                                            alt={post.title}
+                                            className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                        />
+                                    ) : (
+                                        <span>🔑</span>
+                                    )}
                                     <span style={{
                                         position: 'absolute',
                                         top: '1rem',
@@ -121,7 +130,8 @@ export const BlogCarousel = ({ posts }) => {
                                         borderRadius: '20px',
                                         fontSize: '0.75rem',
                                         fontWeight: '600',
-                                        zIndex: 10
+                                        zIndex: 10,
+                                        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
                                     }}>{post.category}</span>
                                 </div>
 

@@ -129,7 +129,8 @@ export const AnimatedTestimonials = ({
                     ease: "easeInOut",
                     delay: 0.02 * index,
                   }}
-                  className="inline-block">
+                  className="inline-block"
+                  suppressHydrationWarning>
                   {word}&nbsp;
                 </motion.span>
               ))}
@@ -140,13 +141,13 @@ export const AnimatedTestimonials = ({
               onClick={handlePrev}
               className="group/button flex h-10 w-10 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all">
               <IconArrowLeft
-                className="h-6 w-6 text-white transition-transform duration-300 group-hover/button:rotate-12" />
+                className="h-6 w-6 text-white transition-transform duration-300 group-hover/button:rotate-12" suppressHydrationWarning />
             </button>
             <button
               onClick={handleNext}
               className="group/button flex h-10 w-10 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all">
               <IconArrowRight
-                className="h-6 w-6 text-white transition-transform duration-300 group-hover/button:-rotate-12" />
+                className="h-6 w-6 text-white transition-transform duration-300 group-hover/button:-rotate-12" suppressHydrationWarning />
             </button>
           </div>
         </div>

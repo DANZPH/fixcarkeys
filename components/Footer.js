@@ -38,7 +38,7 @@ export default function Footer() {
           <div>
             <div suppressHydrationWarning style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
               <div suppressHydrationWarning style={{ position: 'relative', width: '32px', height: '32px' }}>
-                <Image src={logo} alt="FixCarKeys Logo" fill style={{ objectFit: 'contain' }} />
+                <Image src={logo} alt="FixCarKeys Logo" fill style={{ objectFit: 'contain' }} suppressHydrationWarning />
               </div>
               <h3 style={{ fontSize: '1.5rem', fontWeight: '700', margin: 0 }}>FixCarKeys</h3>
             </div>

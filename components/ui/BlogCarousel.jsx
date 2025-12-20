@@ -100,6 +100,7 @@ export const BlogCarousel = ({ posts }) => {
                             style={{
                                 width: `${100 / posts.length}%`,
                             }}
+                            suppressHydrationWarning
                         >
                             <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col border border-gray-100 hover:-translate-y-1">
                                 {/* Image Placeholder or Actual Image */}
@@ -118,6 +119,7 @@ export const BlogCarousel = ({ posts }) => {
                                             src={post.image_url}
                                             alt={post.title}
                                             className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                            suppressHydrationWarning
                                         />
                                     ) : (
                                         <span>🔑</span>
@@ -159,11 +161,11 @@ export const BlogCarousel = ({ posts }) => {
                                     </p>
 
                                     <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
-                                        <Link href={`/blog/${post.id}`} className="relative z-10 bg-[#0056b3] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-[#004494] transition-colors flex items-center gap-2">
-                                            Read More <IconArrowRight size={16} />
+                                        <Link href={`/blog/${post.id}`} className="relative z-10 bg-[#0056b3] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-[#004494] transition-colors flex items-center gap-2" suppressHydrationWarning>
+                                            Read More <IconArrowRight size={16} suppressHydrationWarning />
                                         </Link>
-                                        <div className="flex items-center gap-1 text-gray-400 text-xs">
-                                            <IconMessageCircle size={16} />
+                                        <div className="flex items-center gap-1 text-gray-400 text-xs" suppressHydrationWarning>
+                                            <IconMessageCircle size={16} suppressHydrationWarning />
                                             <span>0</span>
                                         </div>
                                     </div>

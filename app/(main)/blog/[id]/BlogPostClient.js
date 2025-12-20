@@ -17,7 +17,7 @@ export default function BlogPostClient({ post }) {
             <div className="container mx-auto px-4 max-w-3xl">
                 {/* Breadcrumb / Back Link */}
                 <Link
-                    href="/#blog"
+                    href="/"
                     className="inline-flex items-center text-[#778873] hover:text-[#5f6d5c] mb-8 font-medium transition-colors"
                 >
                     <ArrowLeft className="w-4 h-4 mr-2" />

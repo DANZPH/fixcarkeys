@@ -180,6 +180,7 @@ export const BlogCarousel = ({ posts }) => {
                     onClick={prevSlide}
                     className="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-[#778873] hover:bg-[#778873] hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={currentIndex === 0}
+                    suppressHydrationWarning
                 >
                     <IconArrowLeft size={20} />
                 </button>
@@ -199,6 +200,7 @@ export const BlogCarousel = ({ posts }) => {
                     onClick={nextSlide}
                     className="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-[#778873] hover:bg-[#778873] hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={currentIndex >= posts.length - itemsPerPage}
+                    suppressHydrationWarning
                 >
                     <IconArrowRight size={20} />
                 </button>

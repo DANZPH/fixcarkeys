@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className} suppressHydrationWarning>
         <Navbar />
-        <main>{children}</main>
+        <main style={{ overflowX: 'hidden' }}>{children}</main>
         <FloatingButtons />
         <Footer />
       </body>

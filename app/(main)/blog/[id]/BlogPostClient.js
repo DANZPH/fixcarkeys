@@ -2,27 +2,35 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ArrowLeft, Calendar, User, Phone } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 
 export default function BlogPostClient({ post }) {
+    const router = useRouter();
+
     // Format date
     const date = new Date(post.created_at).toLocaleDateString('en-US', {
         year: 'numeric', month: 'long', day: 'numeric'
     });
 
+    // Handle back navigation
+    const handleBack = () => {
+        router.back();
+    };
+
     return (
         <div className="min-h-screen bg-white pb-16" style={{ paddingTop: '100px' }}>
             <div className="container mx-auto px-4 max-w-3xl">
                 {/* Breadcrumb / Back Link */}
-                <Link
-                    href="/"
-                    className="inline-flex items-center text-[#778873] hover:text-[#5f6d5c] mb-8 font-medium transition-colors"
+                <button
+                    onClick={handleBack}
+                    className="inline-flex items-center text-[#778873] hover:text-[#5f6d5c] mb-8 font-medium transition-colors cursor-pointer bg-transparent border-none"
                 >
                     <ArrowLeft className="w-4 h-4 mr-2" />
                     Back to Articles
-                </Link>
+                </button>
 
                 {/* Article Header */}
                 <header className="mb-8 text-center">

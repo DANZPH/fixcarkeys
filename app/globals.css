@@ -357,3 +357,299 @@ body {
 .hero-video {
   animation: scaleIn 1s ease-out 0.4s both;
 }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===== COMPREHENSIVE MOBILE RESPONSIVE STYLES ===== */
+
+/* Large tablets and small desktops */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 24px;
+  }
+
+  .section-title {
+    font-size: 2.25rem;
+  }
+
+  /* Hero adjustments */
+  .hero-content {
+    gap: 2rem !important;
+  }
+
+  .hero-text {
+    flex: 1 1 400px !important;
+  }
+
+  .hero-media {
+    flex: 1 1 350px !important;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+
+  /* Navbar */
+  .nav-links {
+    display: none !important;
+  }
+
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+
+  /* Container adjustments */
+  .container {
+    padding: 0 16px;
+  }
+
+  /* Page headers */
+  section h1 {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+
+  section h2 {
+    font-size: 1.75rem !important;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Hero section mobile - center content */
+  .hero-content {
+    flex-direction: column-reverse !important;
+    text-align: center !important;
+    gap: 2rem !important;
+  }
+
+  .hero-text {
+    flex: 1 1 100% !important;
+    text-align: center !important;
+    min-width: 100% !important;
+  }
+
+  .hero-media {
+    flex: 1 1 100% !important;
+    min-width: 100% !important;
+    max-width: 400px !important;
+  }
+
+  .hero-title {
+    font-size: 2.5rem !important;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem !important;
+    letter-spacing: 1.5px !important;
+  }
+
+  .hero-description {
+    font-size: 1rem !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .hero-buttons {
+    justify-content: center !important;
+  }
+
+  .hero-stats {
+    max-width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  .hero-video {
+    transform: none !important;
+  }
+
+  /* Contact page responsive grid */
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Quick contact buttons */
+  .quick-contact-buttons {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Footer mobile */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    text-align: center;
+  }
+
+  .footer-grid>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-bottom {
+    flex-direction: column !important;
+    gap: 1rem !important;
+    text-align: center !important;
+  }
+
+  /* Areas page */
+  .areas-accordion button {
+    padding: 1.25rem 1rem !important;
+    font-size: 1rem !important;
+  }
+
+  /* Car brands grid */
+  #car-brands>div>div:last-of-type:not(:first-of-type) {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+
+  #car-brands .card {
+    padding: 0.875rem 0.5rem !important;
+  }
+
+  /* Reduce section padding */
+  section {
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  section h1 {
+    font-size: 1.75rem !important;
+    letter-spacing: -0.5px !important;
+  }
+
+  section h2 {
+    font-size: 1.5rem !important;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.9rem;
+  }
+
+  /* Buttons responsive */
+  .btn-primary {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Hero adjustments for small screens */
+  .hero-title {
+    font-size: 2rem !important;
+    line-height: 1.1 !important;
+  }
+
+  .hero-subtitle {
+    font-size: 0.85rem !important;
+    letter-spacing: 1px !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .hero-description {
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+  }
+
+  .hero-buttons {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .hero-buttons>* {
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+
+  .hero-stats {
+    gap: 0.75rem !important;
+    grid-template-columns: 1fr 1fr 1fr !important;
+  }
+
+  .hero-stats>div>div:first-child {
+    font-size: 1.5rem !important;
+  }
+
+  .hero-stats>div>div:last-child {
+    font-size: 0.75rem !important;
+  }
+
+  /* Modal responsiveness */
+  .modal-content {
+    padding: 1.5rem !important;
+    margin: 1rem !important;
+  }
+
+  /* Map modal */
+  .map-modal {
+    height: 350px !important;
+  }
+
+  /* Contact form */
+  form input,
+  form select,
+  form textarea {
+    font-size: 16px !important;
+    /* Prevent zoom on iOS */
+  }
+
+  /* Quick links cards on home page */
+  .quick-links-grid>a>div {
+    padding: 1.5rem !important;
+  }
+
+  /* Reduce section padding even more */
+  section {
+    padding-top: 50px !important;
+    padding-bottom: 50px !important;
+  }
+
+  /* Page header sections */
+  section:first-of-type {
+    padding-top: 120px !important;
+    padding-bottom: 50px !important;
+  }
+
+  /* Footer adjustments */
+  .footer-grid {
+    gap: 1.5rem !important;
+  }
+
+  footer {
+    padding: 40px 0 20px !important;
+  }
+
+  /* Floating buttons - smaller on mobile */
+  .floating-btn {
+    width: 50px !important;
+    height: 50px !important;
+    bottom: 16px !important;
+  }
+}

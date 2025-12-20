@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 import {
     Settings, Wrench, MessageSquare, Car, MapPin, FileText,
@@ -184,10 +185,7 @@ export default function AdminDashboard() {
                 backgroundColor: '#f8f9fa',
                 fontFamily: 'sans-serif'
             }}>
-                <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⚙️</div>
-                    <p style={{ color: '#718096', fontSize: '1.2rem', fontWeight: 500 }}>Loading dashboard...</p>
-                </div>
+                <LoadingSpinner text="Loading dashboard..." variant="dark" size="large" />
             </div>
         );
     }

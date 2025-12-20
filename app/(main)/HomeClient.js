@@ -2,157 +2,18 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image'; // Ensure Image is imported
-
 import { motion, AnimatePresence } from 'framer-motion';
-import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
-import { FocusCards } from "@/components/ui/focus-cards";
 import { LayoutTextFlip } from "@/components/ui/TextFlip";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
-import { LogoMarquee } from "@/components/ui/LogoMarquee";
-import { BlogCarousel } from "@/components/ui/BlogCarousel";
-import { Phone, Mail, MapPin, Clock } from 'lucide-react';
-
-// Import default images as fallbacks
-import keyCuttingImg from '@/assets/key_cutting_service.png';
-import keyProgrammingImg from '@/assets/key_programming_service.png';
-import remoteKeyFobImg from '@/assets/remote_key_fob_service.png';
-import keyReplacementImg from '@/assets/key_replacement_service.png';
-import emergencyLockoutImg from '@/assets/emergency_lockout_service.png';
-import ignitionRepairImg from '@/assets/ignition_repair_service.png';
-
-// Default fallback images mapping
-const defaultServiceImages = {
-    'Key Cutting': keyCuttingImg.src,
-    'Key Programming': keyProgrammingImg.src,
-    'Remote Key Fob': remoteKeyFobImg.src,
-    'Key Replacement': keyReplacementImg.src,
-    'Emergency Lockout': emergencyLockoutImg.src,
-    'Ignition Repair': ignitionRepairImg.src,
-};
-
-function AreasSection({ areas }) {
-    const [openIndex, setOpenIndex] = useState(null);
-
-    return (
-        <section id="areas" suppressHydrationWarning style={{ paddingTop: '100px', paddingBottom: '100px', backgroundColor: '#F1F3E0' }}>
-            <div className="container reveal-on-scroll" suppressHydrationWarning>
-                <h2 className="section-title">Areas We Cover</h2>
-                <p className="section-subtitle">Mobile car key services across the North West UK</p>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'start' }}>
-                    {/* Accordion List */}
-                    <div>
-                        {areas.map((area, i) => (
-                            <div key={area.id || i} style={{
-                                backgroundColor: 'white',
-                                marginBottom: '0.25rem',
-                                borderRadius: '6px',
-                                overflow: 'hidden',
-                                boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
-                            }}>
-                                <button
-                                    onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                                    style={{
-                                        width: '100%',
-                                        padding: '0.75rem 1rem',
-                                        display: 'flex',
-                                        justifyContent: 'space-between',
-                                        alignItems: 'center',
-                                        backgroundColor: 'white',
-                                        borderTop: 'none',
-                                        borderRight: 'none',
-                                        borderLeft: 'none',
-                                        borderBottom: openIndex === i ? '1px solid #eee' : 'none',
-                                        cursor: 'pointer',
-                                        fontSize: '0.9rem',
-                                        fontWeight: '500',
-                                        color: '#778873',
-                                        textAlign: 'left'
-                                    }}
-                                    suppressHydrationWarning
-                                >
-                                    <span style={{ textDecoration: 'underline' }}>{area.name}</span>
-                                    <span style={{
-                                        transform: openIndex === i ? 'rotate(180deg)' : 'rotate(0)',
-                                        transition: 'transform 0.3s ease',
-                                        fontSize: '1.25rem',
-                                        color: '#999'
-                                    }}>⌄</span>
-                                </button>
-                                {openIndex === i && (
-                                    <div style={{ padding: '1rem 1.25rem', backgroundColor: '#fafafa' }}>
-                                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                                            {(area.towns || []).map((town, j) => (
-                                                <span key={j} style={{
-                                                    backgroundColor: '#D2DCB6',
-                                                    color: '#778873',
-                                                    padding: '0.35rem 0.75rem',
-                                                    borderRadius: '20px',
-                                                    fontSize: '0.85rem'
-                                                }}>{town}</span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                        ))}
-                        <Link href="/areas" style={{
-                            display: 'inline-block',
-                            marginTop: '1.5rem',
-                            color: '#778873',
-                            fontWeight: '600',
-                            textDecoration: 'none'
-                        }}>
-                            View all areas →
-                        </Link>
-                    </div>
-                    {/* Google Map */}
-                    <div style={{
-                        borderRadius: '16px',
-                        overflow: 'hidden',
-                        boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-                        height: '500px'
-                    }}>
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1523489.8010036945!2d-3.9772853!3d53.4807593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487a4d4c5226f5db%3A0xd9be143804fe6baa!2sNorth%20West%20England!5e0!3m2!1sen!2suk!4v1702500000000!5m2!1sen!2suk"
-                            width="100%"
-                            height="100%"
-                            style={{ border: 0 }}
-                            allowFullScreen=""
-                            loading="lazy"
-                            referrerPolicy="no-referrer-when-downgrade"
-                        />
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
-}
+import { Phone, ChevronRight, Shield, Clock, Wrench } from 'lucide-react';
 
 export default function HomeClient({ initialContent }) {
     const [showContactModal, setShowContactModal] = useState(false);
 
     // Use initialContent directly
-    const { settings, services, testimonials, brands, areas, blogPosts } = initialContent || {
-        settings: {}, settings: {}, services: [], testimonials: [], brands: [], areas: [], blogPosts: []
+    const { settings, services } = initialContent || {
+        settings: {}, services: []
     };
-
-    const scrollTo = (id) => document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
-
-    // Process services for FocusCards
-    const processedServices = services.map(service => ({
-        ...service,
-        src: service.image_url || defaultServiceImages[service.title] || keyCuttingImg.src,
-        desc: service.description,
-    }));
-
-    // Process testimonials for AnimatedTestimonials
-    const processedTestimonials = testimonials.map(t => ({
-        name: t.name,
-        designation: t.designation,
-        quote: t.quote,
-        src: t.image_url || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop'
-    }));
 
     // Get phone number for contact
     const phoneNumber = settings.phone_number || '07444 125447';
@@ -164,10 +25,11 @@ export default function HomeClient({ initialContent }) {
             {/* Hero Section */}
             <section id="home" suppressHydrationWarning style={{
                 background: 'linear-gradient(135deg, #778873 0%, #A1BC98 50%, #D2DCB6 100%)',
-                padding: '140px 0 100px',
+                padding: '120px 0 60px',
                 color: 'white',
                 minHeight: '100vh',
                 display: 'flex',
+                alignItems: 'center',
                 position: 'relative',
                 overflow: 'hidden'
             }}>
@@ -186,15 +48,15 @@ export default function HomeClient({ initialContent }) {
                     pointerEvents: 'none',
                     zIndex: 0
                 }} />
-                <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-                    <div style={{
+                <div className="container" style={{ position: 'relative', zIndex: 1, width: '100%' }}>
+                    <div className="hero-content" style={{
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
-                        gap: '4rem',
+                        gap: '2rem',
                         flexWrap: 'wrap-reverse'
                     }}>
-                        <div style={{ flex: '1 1 500px', textAlign: 'left' }}>
+                        <div className="hero-text" style={{ flex: '1 1 320px', textAlign: 'left', minWidth: '280px' }}>
                             <h1 className="hero-title" style={{
                                 fontSize: '4.5rem',
                                 marginBottom: '0.5rem',
@@ -246,7 +108,7 @@ export default function HomeClient({ initialContent }) {
                                     }}>
                                     Contact →
                                 </button>
-                                <a href="#services" onClick={(e) => { e.preventDefault(); scrollTo('#services'); }}
+                                <Link href="/services"
                                     style={{
                                         border: '2px solid rgba(255,255,255,0.8)',
                                         color: 'white',
@@ -257,7 +119,7 @@ export default function HomeClient({ initialContent }) {
                                         fontSize: '1.05rem'
                                     }}>
                                     View Services
-                                </a>
+                                </Link>
                             </div>
                             <div className="hero-stats" style={{
                                 display: 'grid',
@@ -300,7 +162,7 @@ export default function HomeClient({ initialContent }) {
                             </div>
                         </div>
 
-                        <div style={{ flex: '1 1 400px', display: 'flex', justifyContent: 'center' }}>
+                        <div className="hero-media" style={{ flex: '1 1 280px', display: 'flex', justifyContent: 'center', minWidth: '250px' }}>
                             <div className="hero-video" style={{
                                 position: 'relative',
                                 width: '100%',
@@ -329,252 +191,306 @@ export default function HomeClient({ initialContent }) {
                 </div>
             </section>
 
+            {/* Quick Links Section */}
+            <section style={{ padding: '60px 0', backgroundColor: '#F1F3E0' }}>
+                <div className="container">
+                    <h2 style={{
+                        textAlign: 'center',
+                        fontSize: '2rem',
+                        fontWeight: '700',
+                        color: '#778873',
+                        marginBottom: '0.75rem'
+                    }}>Explore Our Services</h2>
+                    <p style={{
+                        textAlign: 'center',
+                        color: '#666',
+                        marginBottom: '2rem',
+                        maxWidth: '500px',
+                        margin: '0 auto 2rem',
+                        fontSize: '0.95rem'
+                    }}>Professional car key solutions for all your needs</p>
 
-            {/* Services Section */}
-            <section id="services" suppressHydrationWarning style={{ padding: '100px 0', backgroundColor: '#F1F3E0' }}>
-                <div className="container reveal-on-scroll">
-                    <h2 className="section-title">Our Services</h2>
-                    <p className="section-subtitle">Professional car key solutions tailored to your needs</p>
-                    <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center' }}>
-                        <FocusCards cards={processedServices} />
-                    </div>
-                </div>
-            </section>
-
-            {/* Car Brands Section */}
-            <section id="car-brands" suppressHydrationWarning style={{
-                paddingTop: '100px',
-                paddingBottom: '100px',
-                backgroundImage: 'linear-gradient(135deg, #778873 0%, #A1BC98 50%, #D2DCB6 100%)',
-                position: 'relative',
-                overflow: 'hidden'
-            }}>
-                {/* Decorative background elements */}
-                <div suppressHydrationWarning style={{
-                    position: 'absolute',
-                    top: '-10%',
-                    right: '5%',
-                    width: '500px',
-                    height: '500px',
-                    borderRadius: '50%',
-                    backgroundColor: 'rgba(255,255,255,0.03)',
-                    filter: 'blur(80px)',
-                    zIndex: 0
-                }} />
-                <div suppressHydrationWarning style={{
-                    position: 'absolute',
-                    bottom: '-10%',
-                    left: '5%',
-                    width: '400px',
-                    height: '400px',
-                    borderRadius: '50%',
-                    backgroundColor: 'rgba(255,255,255,0.05)',
-                    filter: 'blur(60px)',
-                    zIndex: 0
-                }} />
-
-                <div className="reveal-on-scroll" suppressHydrationWarning style={{ position: 'relative', zIndex: 1 }}>
-                    <div suppressHydrationWarning style={{ textAlign: 'center', marginBottom: '4rem' }} className="container">
-                        <span style={{
-                            display: 'inline-block',
-                            backgroundColor: 'rgba(255,255,255,0.2)',
-                            backdropFilter: 'blur(10px)',
-                            color: 'white',
-                            padding: '8px 20px',
-                            borderRadius: '50px',
-                            fontSize: '0.85rem',
-                            fontWeight: '600',
-                            marginBottom: '1rem',
-                            border: '1px solid rgba(255,255,255,0.3)',
-                            textTransform: 'uppercase',
-                            letterSpacing: '1px'
-                        }}>
-                            Certified Brand Specialists
-                        </span>
-                        <h2 style={{
-                            fontSize: '3.5rem',
-                            color: 'white',
-                            marginBottom: '1rem',
-                            fontWeight: '800',
-                            letterSpacing: '-1.5px',
-                            lineHeight: 1.1
-                        }}>Car Brands We Service</h2>
-                        <p style={{
-                            color: 'rgba(255,255,255,0.9)',
-                            fontSize: '1.25rem',
-                            maxWidth: '600px',
-                            margin: '0 auto'
-                        }}>We carry the latest diagnostic equipment and key blanks for over 60 manufacturers.</p>
-                    </div>
-
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0px' }}>
-                        <LogoMarquee items={brands.slice(0, Math.ceil(brands.length / 2))} speed={50} direction="left" suppressHydrationWarning />
-                        <LogoMarquee items={brands.slice(Math.ceil(brands.length / 2))} speed={60} direction="right" suppressHydrationWarning />
-                    </div>
-
-                    <div className="container" style={{ marginTop: '3rem' }}>
-                        <div style={{
-                            backgroundColor: 'rgba(255,255,255,0.1)',
-                            backdropFilter: 'blur(10px)',
-                            borderRadius: '24px',
-                            padding: '2rem',
-                            border: '1px solid rgba(255,255,255,0.2)',
-                            textAlign: 'center'
-                        }}>
-                            <p style={{
-                                color: 'white',
-                                fontSize: '1.1rem',
-                                margin: 0,
-                                fontWeight: '500'
-                            }}>
-                                Don't see your brand? <a
-                                    href="#contact"
-                                    onClick={(e) => { e.preventDefault(); scrollTo('#contact'); }}
-                                    style={{
-                                        color: 'white',
-                                        fontWeight: '700',
-                                        textDecoration: 'underline',
-                                        textUnderlineOffset: '4px'
-                                    }}
-                                >Contact us</a> — we service 99% of vehicles on the road today!
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
-            {/* Areas Section */}
-            <AreasSection areas={areas} />
-
-
-            {/* Reviews Section */}
-            <section id="reviews" suppressHydrationWarning style={{ padding: '100px 0', backgroundColor: '#778873' }}>
-                <div className="container reveal-on-scroll">
-                    <h2 className="section-title" style={{ color: 'white' }}>What Our Customers Say</h2>
-                    <p className="section-subtitle" style={{ color: 'rgba(255,255,255,0.85)' }}>Real reviews from real customers</p>
-
-                    {processedTestimonials.length > 0 && (
-                        <AnimatedTestimonials testimonials={processedTestimonials} />
-                    )}
-                </div>
-            </section>
-
-            {/* Blog Section */}
-            <section id="blog" suppressHydrationWarning style={{ padding: '100px 0', backgroundColor: '#F1F3E0' }}>
-                <div className="container reveal-on-scroll">
-                    <h2 className="section-title">Tips & Resources</h2>
-                    <p className="section-subtitle">Helpful articles about car keys and locksmith services</p>
-                    <div style={{ marginTop: '2rem' }}>
-                        <BlogCarousel posts={blogPosts} />
-                    </div>
-                </div>
-            </section>
-
-            {/* Contact Section */}
-            <section id="contact" suppressHydrationWarning style={{ padding: '100px 0', backgroundColor: '#A1BC98' }}>
-                <div className="container reveal-on-scroll">
-                    <h2 className="section-title" style={{ color: 'white' }}>Get In Touch</h2>
-                    <p className="section-subtitle" style={{ color: 'rgba(255,255,255,0.9)' }}>Ready to get started? Contact us for a free quote</p>
                     <div style={{
                         display: 'grid',
-                        gridTemplateColumns: '1fr 1fr',
-                        gap: '4rem',
-                        maxWidth: '1000px',
-                        margin: '0 auto'
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+                        gap: '1rem'
                     }}>
-                        <form onSubmit={(e) => { e.preventDefault(); alert('Thank you! We will contact you soon.'); }}
-                            style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                            <input type="text" placeholder="Your Name" required style={{
-                                padding: '16px 20px',
-                                borderRadius: '10px',
-                                border: 'none',
-                                fontSize: '1rem',
+                        <Link href="/services" style={{ textDecoration: 'none' }}>
+                            <div style={{
                                 backgroundColor: 'white',
-                                boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
-                            }} />
-                            <input type="email" placeholder="Email Address" required style={{
-                                padding: '16px 20px',
-                                borderRadius: '10px',
-                                border: 'none',
-                                fontSize: '1rem',
-                                backgroundColor: 'white',
-                                boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
-                            }} />
-                            <input type="tel" placeholder="Phone Number" style={{
-                                padding: '16px 20px',
-                                borderRadius: '10px',
-                                border: 'none',
-                                fontSize: '1rem',
-                                backgroundColor: 'white',
-                                boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
-                            }} />
-                            <select style={{
-                                padding: '16px 20px',
-                                borderRadius: '10px',
-                                border: 'none',
-                                fontSize: '1rem',
-                                backgroundColor: 'white',
-                                boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
-                            }}>
-                                <option value="">Select a Service</option>
-                                {services.map((s, i) => (
-                                    <option key={i}>{s.title}</option>
-                                ))}
-                            </select>
-                            <textarea placeholder="Tell us about your needs..." rows={4} style={{
-                                padding: '16px 20px',
-                                borderRadius: '10px',
-                                border: 'none',
-                                fontSize: '1rem',
-                                resize: 'vertical',
-                                backgroundColor: 'white',
-                                boxShadow: '0 2px 10px rgba(0,0,0,0.05)',
-                                fontFamily: 'inherit'
-                            }} />
-                            <button type="submit" style={{
-                                backgroundColor: '#778873',
-                                color: 'white',
-                                padding: '16px',
-                                borderRadius: '10px',
-                                border: 'none',
-                                fontSize: '1.05rem',
-                                fontWeight: '600',
-                                cursor: 'pointer',
-                                transition: 'all 0.3s ease'
-                            }}>Send Message →</button>
-                        </form>
-                        <div style={{ color: 'white' }}>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                {[
-                                    { icon: <Phone size={24} />, title: 'Phone', info: phoneNumber, sub: '24/7 Emergency Line Available' },
-                                    { icon: <Mail size={24} />, title: 'Email', info: settings.email || 'info@fixcarkeys.co.uk', sub: 'We reply within 24 hours' },
-                                    { icon: <MapPin size={24} />, title: 'Location', info: settings.address || 'North West England, UK', sub: 'Mobile service available' },
-                                    { icon: <Clock size={24} />, title: 'Hours', info: settings.hours || 'Mon-Sun: 24/7', sub: 'Emergency availability' }
-                                ].map((item, i) => (
-                                    <div key={`${item.title}-${i}`} suppressHydrationWarning style={{
-                                        backgroundColor: 'rgba(255,255,255,0.15)',
-                                        padding: '1rem 1.25rem',
-                                        borderRadius: '12px',
-                                        backdropFilter: 'blur(10px)'
-                                    }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }} suppressHydrationWarning>
-                                            <span style={{
-                                                color: 'white',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                opacity: 0.9
-                                            }}>{item.icon}</span>
-                                            <div suppressHydrationWarning>
-                                                <h3 style={{ marginBottom: '0.1rem', fontSize: '1rem' }}>{item.title}</h3>
-                                                <p style={{ margin: 0, fontWeight: '500', fontSize: '0.95rem' }}>{item.info}</p>
-                                                <p style={{ margin: '0.1rem 0 0', opacity: 0.8, fontSize: '0.8rem' }}>{item.sub}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
+                                borderRadius: '16px',
+                                padding: '1.5rem',
+                                boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
+                                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                textAlign: 'center',
+                                cursor: 'pointer'
+                            }}
+                                onMouseOver={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(-5px)';
+                                    e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.08)';
+                                }}
+                                onMouseOut={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(0)';
+                                    e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.04)';
+                                }}
+                            >
+                                <div style={{
+                                    width: '50px',
+                                    height: '50px',
+                                    backgroundColor: '#D2DCB6',
+                                    borderRadius: '50%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    margin: '0 auto 1rem'
+                                }}>
+                                    <Wrench size={24} color="#778873" />
+                                </div>
+                                <h3 style={{ color: '#778873', fontSize: '1.1rem', marginBottom: '0.5rem' }}>Our Services</h3>
+                                <p style={{ color: '#666', marginBottom: '0.75rem', fontSize: '0.85rem' }}>Key cutting, programming & more</p>
+                                <span style={{ color: '#778873', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem', fontSize: '0.9rem' }}>
+                                    View <ChevronRight size={16} />
+                                </span>
                             </div>
+                        </Link>
+
+                        <Link href="/car-brands" style={{ textDecoration: 'none' }}>
+                            <div style={{
+                                backgroundColor: 'white',
+                                borderRadius: '16px',
+                                padding: '1.5rem',
+                                boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
+                                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                textAlign: 'center',
+                                cursor: 'pointer'
+                            }}
+                                onMouseOver={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(-5px)';
+                                    e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.08)';
+                                }}
+                                onMouseOut={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(0)';
+                                    e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.04)';
+                                }}
+                            >
+                                <div style={{
+                                    width: '50px',
+                                    height: '50px',
+                                    backgroundColor: '#D2DCB6',
+                                    borderRadius: '50%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    margin: '0 auto 1rem',
+                                    fontSize: '1.5rem'
+                                }}>
+                                    🚗
+                                </div>
+                                <h3 style={{ color: '#778873', fontSize: '1.1rem', marginBottom: '0.5rem' }}>Car Brands</h3>
+                                <p style={{ color: '#666', marginBottom: '0.75rem', fontSize: '0.85rem' }}>60+ brands supported</p>
+                                <span style={{ color: '#778873', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem', fontSize: '0.9rem' }}>
+                                    View <ChevronRight size={16} />
+                                </span>
+                            </div>
+                        </Link>
+
+                        <Link href="/areas" style={{ textDecoration: 'none' }}>
+                            <div style={{
+                                backgroundColor: 'white',
+                                borderRadius: '16px',
+                                padding: '1.5rem',
+                                boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
+                                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                textAlign: 'center',
+                                cursor: 'pointer'
+                            }}
+                                onMouseOver={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(-5px)';
+                                    e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.08)';
+                                }}
+                                onMouseOut={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(0)';
+                                    e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.04)';
+                                }}
+                            >
+                                <div style={{
+                                    width: '50px',
+                                    height: '50px',
+                                    backgroundColor: '#D2DCB6',
+                                    borderRadius: '50%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    margin: '0 auto 1rem',
+                                    fontSize: '1.5rem'
+                                }}>
+                                    📍
+                                </div>
+                                <h3 style={{ color: '#778873', fontSize: '1.1rem', marginBottom: '0.5rem' }}>Areas Covered</h3>
+                                <p style={{ color: '#666', marginBottom: '0.75rem', fontSize: '0.85rem' }}>North West UK service</p>
+                                <span style={{ color: '#778873', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem', fontSize: '0.9rem' }}>
+                                    View <ChevronRight size={16} />
+                                </span>
+                            </div>
+                        </Link>
+
+                        <Link href="/reviews" style={{ textDecoration: 'none' }}>
+                            <div style={{
+                                backgroundColor: 'white',
+                                borderRadius: '16px',
+                                padding: '1.5rem',
+                                boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
+                                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                textAlign: 'center',
+                                cursor: 'pointer'
+                            }}
+                                onMouseOver={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(-5px)';
+                                    e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.08)';
+                                }}
+                                onMouseOut={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(0)';
+                                    e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.04)';
+                                }}
+                            >
+                                <div style={{
+                                    width: '50px',
+                                    height: '50px',
+                                    backgroundColor: '#D2DCB6',
+                                    borderRadius: '50%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    margin: '0 auto 1rem',
+                                    fontSize: '1.5rem'
+                                }}>
+                                    ⭐
+                                </div>
+                                <h3 style={{ color: '#778873', fontSize: '1.1rem', marginBottom: '0.5rem' }}>Reviews</h3>
+                                <p style={{ color: '#666', marginBottom: '0.75rem', fontSize: '0.85rem' }}>Customer testimonials</p>
+                                <span style={{ color: '#778873', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem', fontSize: '0.9rem' }}>
+                                    View <ChevronRight size={16} />
+                                </span>
+                            </div>
+                        </Link>
+
+                        <Link href="/blog" style={{ textDecoration: 'none' }}>
+                            <div style={{
+                                backgroundColor: 'white',
+                                borderRadius: '16px',
+                                padding: '1.5rem',
+                                boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
+                                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                textAlign: 'center',
+                                cursor: 'pointer'
+                            }}
+                                onMouseOver={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(-5px)';
+                                    e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.08)';
+                                }}
+                                onMouseOut={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(0)';
+                                    e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.04)';
+                                }}
+                            >
+                                <div style={{
+                                    width: '50px',
+                                    height: '50px',
+                                    backgroundColor: '#D2DCB6',
+                                    borderRadius: '50%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    margin: '0 auto 1rem',
+                                    fontSize: '1.5rem'
+                                }}>
+                                    📝
+                                </div>
+                                <h3 style={{ color: '#778873', fontSize: '1.1rem', marginBottom: '0.5rem' }}>Tips & Blog</h3>
+                                <p style={{ color: '#666', marginBottom: '0.75rem', fontSize: '0.85rem' }}>Guides & resources</p>
+                                <span style={{ color: '#778873', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem', fontSize: '0.9rem' }}>
+                                    Read <ChevronRight size={16} />
+                                </span>
+                            </div>
+                        </Link>
+
+                        <Link href="/contact" style={{ textDecoration: 'none' }}>
+                            <div style={{
+                                backgroundColor: '#778873',
+                                borderRadius: '16px',
+                                padding: '1.5rem',
+                                boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
+                                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                textAlign: 'center',
+                                cursor: 'pointer',
+                                color: 'white'
+                            }}
+                                onMouseOver={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(-5px)';
+                                    e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.12)';
+                                }}
+                                onMouseOut={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(0)';
+                                    e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.08)';
+                                }}
+                            >
+                                <div style={{
+                                    width: '50px',
+                                    height: '50px',
+                                    backgroundColor: 'rgba(255,255,255,0.2)',
+                                    borderRadius: '50%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    margin: '0 auto 1rem'
+                                }}>
+                                    <Phone size={24} color="white" />
+                                </div>
+                                <h3 style={{ color: 'white', fontSize: '1.1rem', marginBottom: '0.5rem' }}>Contact Us</h3>
+                                <p style={{ color: 'rgba(255,255,255,0.9)', marginBottom: '0.75rem', fontSize: '0.85rem' }}>Get a free quote</p>
+                                <span style={{ color: '#F1F3E0', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem', fontSize: '0.9rem' }}>
+                                    Contact <ChevronRight size={16} />
+                                </span>
+                            </div>
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
+            {/* Why Choose Us */}
+            <section style={{ padding: '50px 0', backgroundColor: '#778873', color: 'white' }}>
+                <div className="container">
+                    <h2 style={{
+                        textAlign: 'center',
+                        fontSize: '1.75rem',
+                        fontWeight: '700',
+                        marginBottom: '2rem'
+                    }}>Why Choose FixCarKeys?</h2>
+
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+                        gap: '1.5rem'
+                    }}>
+                        <div style={{ textAlign: 'center' }}>
+                            <Clock size={32} style={{ marginBottom: '0.75rem', opacity: 0.9 }} />
+                            <h3 style={{ fontSize: '1rem', marginBottom: '0.35rem' }}>24/7 Availability</h3>
+                            <p style={{ opacity: 0.85, fontSize: '0.85rem' }}>Emergency services any time</p>
+                        </div>
+                        <div style={{ textAlign: 'center' }}>
+                            <Shield size={32} style={{ marginBottom: '0.75rem', opacity: 0.9 }} />
+                            <h3 style={{ fontSize: '1rem', marginBottom: '0.35rem' }}>Licensed & Insured</h3>
+                            <p style={{ opacity: 0.85, fontSize: '0.85rem' }}>Fully certified professionals</p>
+                        </div>
+                        <div style={{ textAlign: 'center' }}>
+                            <Wrench size={32} style={{ marginBottom: '0.75rem', opacity: 0.9 }} />
+                            <h3 style={{ fontSize: '1rem', marginBottom: '0.35rem' }}>Mobile Service</h3>
+                            <p style={{ opacity: 0.85, fontSize: '0.85rem' }}>We come to you</p>
+                        </div>
+                        <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <span style={{ fontSize: '2rem', marginBottom: '0.35rem' }}>⭐</span>
+                            <h3 style={{ fontSize: '1rem', marginBottom: '0.35rem' }}>5-Star Rated</h3>
+                            <p style={{ opacity: 0.85, fontSize: '0.85rem' }}>Trusted by customers</p>
                         </div>
                     </div>
                 </div>
@@ -683,6 +599,25 @@ export default function HomeClient({ initialContent }) {
                                 >
                                     📞 Call {phoneNumber}
                                 </a>
+
+                                <Link href="/contact" style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    gap: '0.75rem',
+                                    backgroundColor: '#F1F3E0',
+                                    color: '#778873',
+                                    padding: '16px',
+                                    borderRadius: '12px',
+                                    textDecoration: 'none',
+                                    fontWeight: '700',
+                                    fontSize: '1.1rem',
+                                    transition: 'transform 0.2s ease'
+                                }}
+                                    onClick={() => setShowContactModal(false)}
+                                >
+                                    ✉️ Contact Form
+                                </Link>
                             </div>
 
                             <p style={{ marginTop: '1.5rem', fontSize: '0.85rem', color: '#9ca3af' }}>

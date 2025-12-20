@@ -29,7 +29,7 @@ export default function Footer() {
       padding: '60px 0 30px'
     }}>
       <div className="container">
-        <div suppressHydrationWarning style={{
+        <div className="footer-grid" suppressHydrationWarning style={{
           display: 'grid',
           gridTemplateColumns: '2fr 1fr 1fr 1fr',
           gap: '3rem',
@@ -111,7 +111,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div suppressHydrationWarning style={{
+        <div className="footer-bottom" suppressHydrationWarning style={{
           borderTop: '1px solid rgba(255,255,255,0.15)',
           paddingTop: '1.5rem',
           display: 'flex',

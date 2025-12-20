@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 
 import {
@@ -596,8 +596,9 @@ function DataPanel({ title, description, data, onAdd, onEdit, onDelete, columns 
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10);
 
-    // Filter data
-    const filteredData = data.filter(item =>
+    // Filter data - ensure data is an array
+    const safeData = Array.isArray(data) ? data : [];
+    const filteredData = safeData.filter(item =>
         columns.some(col => {
             const val = item[col];
             if (!val) return false;
@@ -815,6 +816,334 @@ function DataPanel({ title, description, data, onAdd, onEdit, onDelete, columns 
     );
 }
 
+// Rich Text Editor Component - Custom implementation for React 19 compatibility
+function RichTextEditor({ label, value, onChange, required }) {
+    const [viewMode, setViewMode] = useState('markdown'); // 'markdown', 'visual', 'preview', 'split'
+    const textareaRef = useRef(null);
+    const visualRef = useRef(null);
+
+    // Simple Markdown to HTML converter
+    const convertMarkdownToHtml = (md) => {
+        if (!md) return '';
+        let html = md
+            // Headers
+            .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+            .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+            .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+            // Bold
+            .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
+            // Italic
+            .replace(/\*(.*?)\*/gim, '<em>$1</em>')
+            // Links
+            .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" class="text-blue-600 hover:underline">$1</a>')
+            // Blockquotes
+            .replace(/^\> (.*$)/gim, '<blockquote style="border-left: 3px solid #778873; padding-left: 1rem; color: #4a5568; margin: 1rem 0;">$1</blockquote>')
+            // Horizontal rule
+            .replace(/^---$/gim, '<hr style="border: none; border-top: 1px solid #e2e8f0; margin: 1.5rem 0;">')
+            // Inline code
+            .replace(/`(.*?)`/gim, '<code style="background: #f1f5f9; padding: 0.125rem 0.25rem; border-radius: 4px; font-family: monospace;">$1</code>')
+            // Unordered list items
+            .replace(/^\* (.*$)/gim, '<li style="margin-left: 1.5rem; list-style-type: disc;">$1</li>')
+            // Ordered list items
+            .replace(/^\d+\. (.*$)/gim, '<li style="margin-left: 1.5rem; list-style-type: decimal;">$1</li>')
+            // Paragraphs (lines that aren't already wrapped)
+            .replace(/^(?!<[h|l|b|c|a|hr])(.+)$/gim, '<p style="margin-bottom: 1rem;">$1</p>')
+            // Line breaks
+            .replace(/\n/gim, '');
+        return html;
+    };
+
+    // Markdown formatting helper
+    const insertMarkdown = (prefix, suffix = '') => {
+        const textarea = textareaRef.current;
+        if (!textarea) return;
+
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const text = value || '';
+        const selectedText = text.substring(start, end);
+
+        const newText = text.substring(0, start) + prefix + selectedText + suffix + text.substring(end);
+        onChange(newText);
+
+        setTimeout(() => {
+            textarea.focus();
+            const newPos = start + prefix.length + selectedText.length + suffix.length;
+            textarea.setSelectionRange(newPos, newPos);
+        }, 0);
+    };
+
+    const markdownTools = [
+        { label: 'H1', action: () => insertMarkdown('# ', '\n'), title: 'Heading 1' },
+        { label: 'H2', action: () => insertMarkdown('## ', '\n'), title: 'Heading 2' },
+        { label: 'H3', action: () => insertMarkdown('### ', '\n'), title: 'Heading 3' },
+        { label: 'B', action: () => insertMarkdown('**', '**'), title: 'Bold' },
+        { label: 'I', action: () => insertMarkdown('*', '*'), title: 'Italic' },
+        { label: '• List', action: () => insertMarkdown('\n* ', '\n'), title: 'Bullet List' },
+        { label: '1. List', action: () => insertMarkdown('\n1. ', '\n'), title: 'Numbered List' },
+        { label: 'Link', action: () => insertMarkdown('[', '](url)'), title: 'Link' },
+        { label: 'Quote', action: () => insertMarkdown('\n> ', '\n'), title: 'Blockquote' },
+        { label: 'Code', action: () => insertMarkdown('`', '`'), title: 'Inline Code' },
+        { label: '---', action: () => insertMarkdown('\n---\n', ''), title: 'Horizontal Rule' },
+    ];
+
+    // Visual editor formatting
+    const formatVisual = (command, val = null) => {
+        document.execCommand(command, false, val);
+        if (visualRef.current) {
+            onChange(visualRef.current.innerHTML);
+        }
+    };
+
+    const visualTools = [
+        { label: 'B', action: () => formatVisual('bold'), title: 'Bold' },
+        { label: 'I', action: () => formatVisual('italic'), title: 'Italic' },
+        { label: 'U', action: () => formatVisual('underline'), title: 'Underline' },
+        { label: 'H2', action: () => formatVisual('formatBlock', 'h2'), title: 'Heading 2' },
+        { label: 'H3', action: () => formatVisual('formatBlock', 'h3'), title: 'Heading 3' },
+        { label: '• List', action: () => formatVisual('insertUnorderedList'), title: 'Bullet List' },
+        { label: '1. List', action: () => formatVisual('insertOrderedList'), title: 'Numbered List' },
+        { label: 'Link', action: () => { const url = prompt('Enter URL:'); if (url) formatVisual('createLink', url); }, title: 'Insert Link' },
+    ];
+
+    const viewModes = [
+        { key: 'markdown', label: '< > Markdown', icon: '📝' },
+        { key: 'split', label: 'Split View', icon: '◧' },
+        { key: 'preview', label: 'Preview', icon: '👁️' },
+        { key: 'visual', label: 'Visual', icon: '✏️' },
+    ];
+
+    return (
+        <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                <label style={{
+                    fontSize: '0.8rem',
+                    fontWeight: '700',
+                    color: '#4a5568',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px'
+                }}>
+                    {label} {required && <span style={{ color: '#e53e3e' }}>*</span>}
+                </label>
+                <div style={{ display: 'flex', gap: '0.25rem' }}>
+                    {viewModes.map((mode) => (
+                        <button
+                            key={mode.key}
+                            type="button"
+                            onClick={() => setViewMode(mode.key)}
+                            style={{
+                                background: viewMode === mode.key ? '#778873' : '#f1f5f9',
+                                border: 'none',
+                                color: viewMode === mode.key ? 'white' : '#4a5568',
+                                fontSize: '0.7rem',
+                                fontWeight: '600',
+                                cursor: 'pointer',
+                                padding: '0.35rem 0.6rem',
+                                borderRadius: '4px'
+                            }}
+                        >
+                            {mode.icon} {mode.label}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+            <div style={{
+                backgroundColor: 'white',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                border: '2px solid #e2e8f0',
+                minHeight: '400px'
+            }}>
+                {/* Markdown Mode */}
+                {viewMode === 'markdown' && (
+                    <div>
+                        <div style={{
+                            backgroundColor: '#1a1f2e',
+                            padding: '0.75rem',
+                            display: 'flex',
+                            gap: '0.5rem',
+                            flexWrap: 'wrap',
+                            borderBottom: '1px solid #2d3748'
+                        }}>
+                            {markdownTools.map((tool, idx) => (
+                                <button
+                                    key={idx}
+                                    type="button"
+                                    onClick={tool.action}
+                                    title={tool.title}
+                                    style={{
+                                        padding: '0.35rem 0.75rem',
+                                        borderRadius: '4px',
+                                        border: 'none',
+                                        backgroundColor: '#2d3748',
+                                        color: '#e2e8f0',
+                                        fontSize: '0.8rem',
+                                        fontWeight: '600',
+                                        cursor: 'pointer'
+                                    }}
+                                    onMouseOver={(e) => e.target.style.backgroundColor = '#4a5568'}
+                                    onMouseOut={(e) => e.target.style.backgroundColor = '#2d3748'}
+                                >
+                                    {tool.label}
+                                </button>
+                            ))}
+                        </div>
+                        <textarea
+                            ref={textareaRef}
+                            value={value || ''}
+                            onChange={(e) => onChange(e.target.value)}
+                            style={{
+                                width: '100%',
+                                height: '350px',
+                                padding: '1rem',
+                                border: 'none',
+                                fontFamily: '"Fira Code", "Consolas", monospace',
+                                fontSize: '0.9rem',
+                                resize: 'vertical',
+                                outline: 'none',
+                                color: '#2d3748',
+                                backgroundColor: '#f8fafc',
+                                lineHeight: '1.6',
+                                boxSizing: 'border-box'
+                            }}
+                            placeholder={"Write your content using Markdown syntax...\n\n# Heading 1\n## Heading 2\n\n**Bold text** and *italic text*\n\n* Bullet point\n* Another point\n\n1. Numbered list\n2. Second item"}
+                        />
+                    </div>
+                )}
+
+                {/* Split View Mode */}
+                {viewMode === 'split' && (
+                    <div style={{ display: 'flex', height: '400px' }}>
+                        <div style={{ flex: 1, borderRight: '1px solid #e2e8f0', display: 'flex', flexDirection: 'column' }}>
+                            <div style={{ padding: '0.5rem', backgroundColor: '#1a1f2e', color: '#e2e8f0', fontSize: '0.75rem', fontWeight: '600' }}>
+                                📝 MARKDOWN
+                            </div>
+                            <textarea
+                                ref={textareaRef}
+                                value={value || ''}
+                                onChange={(e) => onChange(e.target.value)}
+                                style={{
+                                    flex: 1,
+                                    padding: '1rem',
+                                    border: 'none',
+                                    fontFamily: '"Fira Code", "Consolas", monospace',
+                                    fontSize: '0.85rem',
+                                    resize: 'none',
+                                    outline: 'none',
+                                    color: '#2d3748',
+                                    backgroundColor: '#f8fafc',
+                                    lineHeight: '1.6',
+                                    boxSizing: 'border-box'
+                                }}
+                                placeholder="Write Markdown here..."
+                            />
+                        </div>
+                        <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                            <div style={{ padding: '0.5rem', backgroundColor: '#778873', color: 'white', fontSize: '0.75rem', fontWeight: '600' }}>
+                                👁️ PREVIEW
+                            </div>
+                            <div
+                                style={{
+                                    flex: 1,
+                                    padding: '1rem',
+                                    overflow: 'auto',
+                                    backgroundColor: 'white',
+                                    lineHeight: '1.6',
+                                    color: '#2d3748'
+                                }}
+                                dangerouslySetInnerHTML={{ __html: convertMarkdownToHtml(value) }}
+                            />
+                        </div>
+                    </div>
+                )}
+
+                {/* Preview Mode */}
+                {viewMode === 'preview' && (
+                    <div>
+                        <div style={{ padding: '0.75rem', backgroundColor: '#778873', color: 'white', fontSize: '0.8rem', fontWeight: '600' }}>
+                            👁️ LIVE PREVIEW
+                        </div>
+                        <div
+                            style={{
+                                minHeight: '350px',
+                                padding: '1.5rem',
+                                overflow: 'auto',
+                                backgroundColor: 'white',
+                                lineHeight: '1.7',
+                                color: '#2d3748',
+                                fontSize: '1rem'
+                            }}
+                            dangerouslySetInnerHTML={{ __html: convertMarkdownToHtml(value) }}
+                        />
+                    </div>
+                )}
+
+                {/* Visual Mode */}
+                {viewMode === 'visual' && (
+                    <div>
+                        <div style={{
+                            backgroundColor: '#f8fafc',
+                            padding: '0.75rem',
+                            display: 'flex',
+                            gap: '0.5rem',
+                            flexWrap: 'wrap',
+                            borderBottom: '1px solid #e2e8f0'
+                        }}>
+                            {visualTools.map((tool, idx) => (
+                                <button
+                                    key={idx}
+                                    type="button"
+                                    onClick={tool.action}
+                                    title={tool.title}
+                                    style={{
+                                        padding: '0.35rem 0.75rem',
+                                        borderRadius: '4px',
+                                        border: '1px solid #cbd5e0',
+                                        backgroundColor: 'white',
+                                        color: '#4a5568',
+                                        fontSize: '0.8rem',
+                                        fontWeight: '600',
+                                        cursor: 'pointer'
+                                    }}
+                                    onMouseOver={(e) => e.target.style.backgroundColor = '#edf2f7'}
+                                    onMouseOut={(e) => e.target.style.backgroundColor = 'white'}
+                                >
+                                    {tool.label}
+                                </button>
+                            ))}
+                        </div>
+                        <div
+                            ref={visualRef}
+                            contentEditable
+                            suppressContentEditableWarning
+                            onInput={(e) => onChange(e.currentTarget.innerHTML)}
+                            dangerouslySetInnerHTML={{ __html: value || '' }}
+                            style={{
+                                minHeight: '350px',
+                                padding: '1rem',
+                                border: 'none',
+                                fontSize: '1rem',
+                                outline: 'none',
+                                color: '#2d3748',
+                                backgroundColor: 'white',
+                                lineHeight: '1.6',
+                                boxSizing: 'border-box'
+                            }}
+                        />
+                    </div>
+                )}
+            </div>
+            <p style={{ fontSize: '0.75rem', color: '#718096', marginTop: '0.5rem' }}>
+                {viewMode === 'markdown' && '💡 Use toolbar buttons or type Markdown syntax (# headings, * lists, **bold**)'}
+                {viewMode === 'split' && '💡 Edit on the left, see the preview on the right in real-time'}
+                {viewMode === 'preview' && '💡 This is how your content will look. Switch to Markdown to edit.'}
+                {viewMode === 'visual' && '💡 Select text and click buttons to format. Works like a word processor.'}
+            </p>
+        </div>
+    );
+}
+
 // Edit Modal Component (Inline Styles)
 function EditModal({ type, item, onSave, onClose, saving }) {
     const [formData, setFormData] = useState({});
@@ -925,9 +1254,9 @@ function EditModal({ type, item, onSave, onClose, saving }) {
         }}>
             <div style={{
                 backgroundColor: 'white',
-                width: '100%',
-                maxWidth: '600px',
-                maxHeight: '90vh',
+                width: type === 'blog' ? '90%' : '100%',
+                maxWidth: type === 'blog' ? '1200px' : '600px',
+                maxHeight: '95vh',
                 borderRadius: '16px',
                 display: 'flex',
                 flexDirection: 'column',
@@ -964,7 +1293,14 @@ function EditModal({ type, item, onSave, onClose, saving }) {
                                 }}>
                                     {field.label} {field.required && <span style={{ color: '#e53e3e' }}>*</span>}
                                 </label>
-                                {field.type === 'textarea' ? (
+                                {field.key === 'content' ? (
+                                    <RichTextEditor
+                                        label={field.label}
+                                        value={getInputValue(field.key)}
+                                        onChange={(val) => handleChange(field.key, val)}
+                                        required={field.required}
+                                    />
+                                ) : field.type === 'textarea' ? (
                                     <textarea
                                         value={getInputValue(field.key)}
                                         onChange={(e) => handleChange(field.key, e.target.value)}

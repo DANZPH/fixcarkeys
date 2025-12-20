@@ -184,16 +184,16 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div style={{
+      <div suppressHydrationWarning style={{
         minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         background: 'linear-gradient(135deg, #778873 0%, #A1BC98 50%, #D2DCB6 100%)'
       }}>
-        <div style={{ textAlign: 'center', color: 'white' }}>
-          <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🔑</div>
-          <p style={{ fontSize: '1.1rem', opacity: 0.9 }}>Loading...</p>
+        <div suppressHydrationWarning style={{ textAlign: 'center', color: 'white' }}>
+          <div suppressHydrationWarning style={{ fontSize: '3rem', marginBottom: '1rem' }}>🔑</div>
+          <p suppressHydrationWarning style={{ fontSize: '1.1rem', opacity: 0.9 }}>Loading...</p>
         </div>
       </div>
     );
@@ -202,7 +202,7 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section id="home" style={{
+      <section id="home" suppressHydrationWarning style={{
         background: 'linear-gradient(135deg, #778873 0%, #A1BC98 50%, #D2DCB6 100%)',
         padding: '140px 0 100px',
         color: 'white',
@@ -371,7 +371,7 @@ export default function Home() {
 
 
       {/* Services Section */}
-      <section id="services" style={{ padding: '100px 0', backgroundColor: '#F1F3E0' }}>
+      <section id="services" suppressHydrationWarning style={{ padding: '100px 0', backgroundColor: '#F1F3E0' }}>
         <div className="container reveal-on-scroll">
           <h2 className="section-title">Our Services</h2>
           <p className="section-subtitle">Professional car key solutions tailored to your needs</p>
@@ -489,7 +489,7 @@ export default function Home() {
 
 
       {/* Reviews Section */}
-      <section id="reviews" style={{ padding: '100px 0', backgroundColor: '#778873' }}>
+      <section id="reviews" suppressHydrationWarning style={{ padding: '100px 0', backgroundColor: '#778873' }}>
         <div className="container reveal-on-scroll">
           <h2 className="section-title" style={{ color: 'white' }}>What Our Customers Say</h2>
           <p className="section-subtitle" style={{ color: 'rgba(255,255,255,0.85)' }}>Real reviews from real customers</p>
@@ -501,7 +501,7 @@ export default function Home() {
       </section>
 
       {/* Blog Section */}
-      <section id="blog" style={{ padding: '100px 0', backgroundColor: '#F1F3E0' }}>
+      <section id="blog" suppressHydrationWarning style={{ padding: '100px 0', backgroundColor: '#F1F3E0' }}>
         <div className="container reveal-on-scroll">
           <h2 className="section-title">Tips & Resources</h2>
           <p className="section-subtitle">Helpful articles about car keys and locksmith services</p>
@@ -512,7 +512,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" style={{ padding: '100px 0', backgroundColor: '#A1BC98' }}>
+      <section id="contact" suppressHydrationWarning style={{ padding: '100px 0', backgroundColor: '#A1BC98' }}>
         <div className="container reveal-on-scroll">
           <h2 className="section-title" style={{ color: 'white' }}>Get In Touch</h2>
           <p className="section-subtitle" style={{ color: 'rgba(255,255,255,0.9)' }}>Ready to get started? Contact us for a free quote</p>

@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { IconArrowLeft, IconArrowRight, IconCalendar, IconUser, IconMessageCircle } from '@tabler/icons-react'; // Assuming tabler icons are available or use lucide
+import { IconArrowLeft, IconArrowRight, IconCalendar, IconUser, IconMessageCircle } from '@tabler/icons-react';
+import Link from 'next/link';
 
 export const BlogCarousel = ({ posts }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -90,6 +91,7 @@ export const BlogCarousel = ({ posts }) => {
                         width: `${(posts.length / itemsPerPage) * 100}%`,
                         display: 'flex',
                     }}
+                    suppressHydrationWarning
                 >
                     {posts.map((post, index) => (
                         <div
@@ -157,9 +159,9 @@ export const BlogCarousel = ({ posts }) => {
                                     </p>
 
                                     <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
-                                        <button className="bg-[#0056b3] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-[#004494] transition-colors flex items-center gap-2">
+                                        <Link href={`/blog/${post.id}`} className="relative z-10 bg-[#0056b3] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-[#004494] transition-colors flex items-center gap-2">
                                             Read More <IconArrowRight size={16} />
-                                        </button>
+                                        </Link>
                                         <div className="flex items-center gap-1 text-gray-400 text-xs">
                                             <IconMessageCircle size={16} />
                                             <span>0</span>

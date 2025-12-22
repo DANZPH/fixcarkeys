@@ -84,6 +84,39 @@ export default function ReviewsPage() {
                     ) : (
                         <p style={{ textAlign: 'center', color: 'white' }}>No reviews available.</p>
                     )}
+
+                    <div style={{ marginTop: '3rem', textAlign: 'center' }}>
+                        <a
+                            href="https://maps.app.goo.gl/wPajYwMJRGG5zvVp6"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '0.5rem',
+                                backgroundColor: 'white',
+                                color: '#778873',
+                                padding: '1rem 1.2rem',
+                                borderRadius: '50px',
+                                fontWeight: '600',
+                                fontSize: '1rem',
+                                textDecoration: 'none',
+                                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                                transition: 'all 0.3s ease'
+                            }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.transform = 'translateY(-2px)';
+                                e.currentTarget.style.boxShadow = '0 8px 16px rgba(0,0,0,0.2)';
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.transform = 'translateY(0)';
+                                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+                            }}
+                        >
+                            <span style={{ fontSize: '1.5rem' }}></span>
+                            See other reviews
+                        </a>
+                    </div>
                 </div>
             </section>
 
@@ -100,67 +133,69 @@ export default function ReviewsPage() {
 
                     <div style={{
                         display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                        gap: '2rem'
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                        gap: '1.5rem',
+                        maxWidth: '1200px',
+                        margin: '0 auto'
                     }}>
                         <div style={{
                             backgroundColor: 'white',
-                            borderRadius: '20px',
-                            padding: '2.5rem',
+                            borderRadius: '16px',
+                            padding: '1.5rem',
                             textAlign: 'center',
-                            boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
+                            boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
                         }}>
                             <div style={{
-                                fontSize: '3rem',
-                                marginBottom: '1rem'
+                                fontSize: '2rem',
+                                marginBottom: '0.75rem'
                             }}>⭐</div>
-                            <h3 style={{ color: '#778873', fontSize: '1.5rem', marginBottom: '0.75rem' }}>5-Star Service</h3>
-                            <p style={{ color: '#666' }}>Consistently rated 5 stars by our customers for quality and reliability.</p>
+                            <h3 style={{ color: '#778873', fontSize: '1.1rem', marginBottom: '0.5rem' }}>5-Star Service</h3>
+                            <p style={{ color: '#666', fontSize: '0.9rem' }}>Consistently rated 5 stars by our customers for quality and reliability.</p>
                         </div>
 
                         <div style={{
                             backgroundColor: 'white',
-                            borderRadius: '20px',
-                            padding: '2.5rem',
+                            borderRadius: '16px',
+                            padding: '1.5rem',
                             textAlign: 'center',
-                            boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
+                            boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
                         }}>
                             <div style={{
-                                fontSize: '3rem',
-                                marginBottom: '1rem'
+                                fontSize: '2rem',
+                                marginBottom: '0.75rem'
                             }}>🔒</div>
-                            <h3 style={{ color: '#778873', fontSize: '1.5rem', marginBottom: '0.75rem' }}>Licensed & Insured</h3>
-                            <p style={{ color: '#666' }}>Fully licensed auto locksmith with comprehensive insurance coverage.</p>
+                            <h3 style={{ color: '#778873', fontSize: '1.1rem', marginBottom: '0.5rem' }}>Licensed & Insured</h3>
+                            <p style={{ color: '#666', fontSize: '0.9rem' }}>Fully licensed auto locksmith with comprehensive insurance coverage.</p>
                         </div>
 
                         <div style={{
                             backgroundColor: 'white',
-                            borderRadius: '20px',
-                            padding: '2.5rem',
+                            borderRadius: '16px',
+                            padding: '1.5rem',
                             textAlign: 'center',
-                            boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
+                            boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
                         }}>
                             <div style={{
-                                fontSize: '3rem',
-                                marginBottom: '1rem'
+                                fontSize: '2rem',
+                                marginBottom: '0.75rem'
                             }}>🏆</div>
-                            <h3 style={{ color: '#778873', fontSize: '1.5rem', marginBottom: '0.75rem' }}>15+ Years Experience</h3>
-                            <p style={{ color: '#666' }}>Over 15 years of expertise in automotive locksmith services.</p>
+                            <h3 style={{ color: '#778873', fontSize: '1.1rem', marginBottom: '0.5rem' }}>15+ Years Experience</h3>
+                            <p style={{ color: '#666', fontSize: '0.9rem' }}>Over 15 years of expertise in automotive locksmith services.</p>
                         </div>
 
                         <div style={{
                             backgroundColor: 'white',
-                            borderRadius: '20px',
-                            padding: '2.5rem',
+                            borderRadius: '16px',
+                            padding: '1.5rem',
                             textAlign: 'center',
-                            boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
+                            boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
                         }}>
                             <div style={{
-                                fontSize: '3rem',
-                                marginBottom: '1rem'
+                                fontSize: '2rem',
+                                marginBottom: '0.75rem'
                             }}>✅</div>
-                            <h3 style={{ color: '#778873', fontSize: '1.5rem', marginBottom: '0.75rem' }}>100% Satisfaction</h3>
-                            <p style={{ color: '#666' }}>We guarantee your satisfaction with every service we provide.</p>
+                            <h3 style={{ color: '#778873', fontSize: '1.1rem', marginBottom: '0.5rem' }}>100% Satisfaction</h3>
+                            <p style={{ color: '#666', fontSize: '0.9rem' }}>We guarantee your satisfaction with every service we provide.</p>
                         </div>
                     </div>
 

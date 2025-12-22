@@ -162,7 +162,23 @@ export default function HomeClient({ initialContent }) {
                             </div>
                         </div>
 
-                        <div className="hero-media" style={{ flex: '1 1 280px', display: 'flex', justifyContent: 'center', minWidth: '250px' }}>
+                        <div className="hero-media" style={{ flex: '1 1 280px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minWidth: '250px' }}>
+                            <a href={`tel:${phoneNumber.replace(/\s/g, '')}`} style={{
+                                fontSize: 'clamp(1.5rem, 5vw, 2.5rem)',
+                                fontWeight: '800',
+                                color: '#F1F3E0',
+                                textDecoration: 'none',
+                                marginBottom: '1.5rem',
+                                textShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.75rem',
+                                zIndex: 10,
+                                whiteSpace: 'nowrap'
+                            }}>
+                                <Phone fill="currentColor" size={32} style={{ filter: 'drop-shadow(0 2px 2px rgba(0,0,0,0.2))' }} />
+                                {phoneNumber}
+                            </a>
                             <div className="hero-video" style={{
                                 position: 'relative',
                                 width: '100%',
@@ -186,6 +202,54 @@ export default function HomeClient({ initialContent }) {
                                     <source src={heroVideoUrl} type="video/mp4" />
                                 </video>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Why Choose Us */}
+            <section style={{ padding: '60px 0', backgroundColor: 'white' }}>
+                <div className="container">
+                    <h2 style={{
+                        textAlign: 'center',
+                        fontSize: '2rem',
+                        fontWeight: '700',
+                        color: '#778873',
+                        marginBottom: '2rem'
+                    }}>Why Choose FixCarKeys?</h2>
+
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+                        gap: '2rem'
+                    }}>
+                        <div style={{ textAlign: 'center' }}>
+                            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+                                <Clock size={36} color="#778873" />
+                            </div>
+                            <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: '#1f2937', fontWeight: '600' }}>24/7 Availability</h3>
+                            <p style={{ color: '#6b7280', fontSize: '0.9rem' }}>Emergency services any time</p>
+                        </div>
+                        <div style={{ textAlign: 'center' }}>
+                            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+                                <Shield size={36} color="#778873" />
+                            </div>
+                            <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: '#1f2937', fontWeight: '600' }}>Licensed & Insured</h3>
+                            <p style={{ color: '#6b7280', fontSize: '0.9rem' }}>Fully certified professionals</p>
+                        </div>
+                        <div style={{ textAlign: 'center' }}>
+                            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+                                <Wrench size={36} color="#778873" />
+                            </div>
+                            <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: '#1f2937', fontWeight: '600' }}>Mobile Service</h3>
+                            <p style={{ color: '#6b7280', fontSize: '0.9rem' }}>We come to you</p>
+                        </div>
+                        <div style={{ textAlign: 'center' }}>
+                            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+                                <span style={{ fontSize: '2.25rem', lineHeight: 1 }}>⭐</span>
+                            </div>
+                            <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: '#1f2937', fontWeight: '600' }}>5-Star Rated</h3>
+                            <p style={{ color: '#6b7280', fontSize: '0.9rem' }}>Trusted by customers</p>
                         </div>
                     </div>
                 </div>
@@ -223,7 +287,10 @@ export default function HomeClient({ initialContent }) {
                                 boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
                                 transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                                 textAlign: 'center',
-                                cursor: 'pointer'
+                                cursor: 'pointer',
+                                height: '100%',
+                                display: 'flex',
+                                flexDirection: 'column'
                             }}
                                 onMouseOver={(e) => {
                                     e.currentTarget.style.transform = 'translateY(-5px)';
@@ -248,7 +315,7 @@ export default function HomeClient({ initialContent }) {
                                 </div>
                                 <h3 style={{ color: '#778873', fontSize: '1.1rem', marginBottom: '0.5rem' }}>Our Services</h3>
                                 <p style={{ color: '#666', marginBottom: '0.75rem', fontSize: '0.85rem' }}>Key cutting, programming & more</p>
-                                <span style={{ color: '#778873', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem', fontSize: '0.9rem' }}>
+                                <span style={{ color: '#778873', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem', fontSize: '0.9rem', marginTop: 'auto' }}>
                                     View <ChevronRight size={16} />
                                 </span>
                             </div>
@@ -262,7 +329,10 @@ export default function HomeClient({ initialContent }) {
                                 boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
                                 transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                                 textAlign: 'center',
-                                cursor: 'pointer'
+                                cursor: 'pointer',
+                                height: '100%',
+                                display: 'flex',
+                                flexDirection: 'column'
                             }}
                                 onMouseOver={(e) => {
                                     e.currentTarget.style.transform = 'translateY(-5px)';
@@ -288,7 +358,7 @@ export default function HomeClient({ initialContent }) {
                                 </div>
                                 <h3 style={{ color: '#778873', fontSize: '1.1rem', marginBottom: '0.5rem' }}>Car Brands</h3>
                                 <p style={{ color: '#666', marginBottom: '0.75rem', fontSize: '0.85rem' }}>60+ brands supported</p>
-                                <span style={{ color: '#778873', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem', fontSize: '0.9rem' }}>
+                                <span style={{ color: '#778873', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem', fontSize: '0.9rem', marginTop: 'auto' }}>
                                     View <ChevronRight size={16} />
                                 </span>
                             </div>
@@ -302,7 +372,10 @@ export default function HomeClient({ initialContent }) {
                                 boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
                                 transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                                 textAlign: 'center',
-                                cursor: 'pointer'
+                                cursor: 'pointer',
+                                height: '100%',
+                                display: 'flex',
+                                flexDirection: 'column'
                             }}
                                 onMouseOver={(e) => {
                                     e.currentTarget.style.transform = 'translateY(-5px)';
@@ -328,7 +401,7 @@ export default function HomeClient({ initialContent }) {
                                 </div>
                                 <h3 style={{ color: '#778873', fontSize: '1.1rem', marginBottom: '0.5rem' }}>Areas Covered</h3>
                                 <p style={{ color: '#666', marginBottom: '0.75rem', fontSize: '0.85rem' }}>North West UK service</p>
-                                <span style={{ color: '#778873', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem', fontSize: '0.9rem' }}>
+                                <span style={{ color: '#778873', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem', fontSize: '0.9rem', marginTop: 'auto' }}>
                                     View <ChevronRight size={16} />
                                 </span>
                             </div>
@@ -342,7 +415,10 @@ export default function HomeClient({ initialContent }) {
                                 boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
                                 transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                                 textAlign: 'center',
-                                cursor: 'pointer'
+                                cursor: 'pointer',
+                                height: '100%',
+                                display: 'flex',
+                                flexDirection: 'column'
                             }}
                                 onMouseOver={(e) => {
                                     e.currentTarget.style.transform = 'translateY(-5px)';
@@ -368,7 +444,7 @@ export default function HomeClient({ initialContent }) {
                                 </div>
                                 <h3 style={{ color: '#778873', fontSize: '1.1rem', marginBottom: '0.5rem' }}>Reviews</h3>
                                 <p style={{ color: '#666', marginBottom: '0.75rem', fontSize: '0.85rem' }}>Customer testimonials</p>
-                                <span style={{ color: '#778873', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem', fontSize: '0.9rem' }}>
+                                <span style={{ color: '#778873', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem', fontSize: '0.9rem', marginTop: 'auto' }}>
                                     View <ChevronRight size={16} />
                                 </span>
                             </div>
@@ -382,7 +458,10 @@ export default function HomeClient({ initialContent }) {
                                 boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
                                 transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                                 textAlign: 'center',
-                                cursor: 'pointer'
+                                cursor: 'pointer',
+                                height: '100%',
+                                display: 'flex',
+                                flexDirection: 'column'
                             }}
                                 onMouseOver={(e) => {
                                     e.currentTarget.style.transform = 'translateY(-5px)';
@@ -408,7 +487,7 @@ export default function HomeClient({ initialContent }) {
                                 </div>
                                 <h3 style={{ color: '#778873', fontSize: '1.1rem', marginBottom: '0.5rem' }}>Tips & Blog</h3>
                                 <p style={{ color: '#666', marginBottom: '0.75rem', fontSize: '0.85rem' }}>Guides & resources</p>
-                                <span style={{ color: '#778873', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem', fontSize: '0.9rem' }}>
+                                <span style={{ color: '#778873', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem', fontSize: '0.9rem', marginTop: 'auto' }}>
                                     Read <ChevronRight size={16} />
                                 </span>
                             </div>
@@ -423,7 +502,10 @@ export default function HomeClient({ initialContent }) {
                                 transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                                 textAlign: 'center',
                                 cursor: 'pointer',
-                                color: 'white'
+                                color: 'white',
+                                height: '100%',
+                                display: 'flex',
+                                flexDirection: 'column'
                             }}
                                 onMouseOver={(e) => {
                                     e.currentTarget.style.transform = 'translateY(-5px)';
@@ -448,7 +530,7 @@ export default function HomeClient({ initialContent }) {
                                 </div>
                                 <h3 style={{ color: 'white', fontSize: '1.1rem', marginBottom: '0.5rem' }}>Contact Us</h3>
                                 <p style={{ color: 'rgba(255,255,255,0.9)', marginBottom: '0.75rem', fontSize: '0.85rem' }}>Get a free quote</p>
-                                <span style={{ color: '#F1F3E0', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem', fontSize: '0.9rem' }}>
+                                <span style={{ color: '#F1F3E0', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem', fontSize: '0.9rem', marginTop: 'auto' }}>
                                     Contact <ChevronRight size={16} />
                                 </span>
                             </div>
@@ -457,44 +539,7 @@ export default function HomeClient({ initialContent }) {
                 </div>
             </section>
 
-            {/* Why Choose Us */}
-            <section style={{ padding: '50px 0', backgroundColor: '#778873', color: 'white' }}>
-                <div className="container">
-                    <h2 style={{
-                        textAlign: 'center',
-                        fontSize: '1.75rem',
-                        fontWeight: '700',
-                        marginBottom: '2rem'
-                    }}>Why Choose FixCarKeys?</h2>
 
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-                        gap: '1.5rem'
-                    }}>
-                        <div style={{ textAlign: 'center' }}>
-                            <Clock size={32} style={{ marginBottom: '0.75rem', opacity: 0.9 }} />
-                            <h3 style={{ fontSize: '1rem', marginBottom: '0.35rem' }}>24/7 Availability</h3>
-                            <p style={{ opacity: 0.85, fontSize: '0.85rem' }}>Emergency services any time</p>
-                        </div>
-                        <div style={{ textAlign: 'center' }}>
-                            <Shield size={32} style={{ marginBottom: '0.75rem', opacity: 0.9 }} />
-                            <h3 style={{ fontSize: '1rem', marginBottom: '0.35rem' }}>Licensed & Insured</h3>
-                            <p style={{ opacity: 0.85, fontSize: '0.85rem' }}>Fully certified professionals</p>
-                        </div>
-                        <div style={{ textAlign: 'center' }}>
-                            <Wrench size={32} style={{ marginBottom: '0.75rem', opacity: 0.9 }} />
-                            <h3 style={{ fontSize: '1rem', marginBottom: '0.35rem' }}>Mobile Service</h3>
-                            <p style={{ opacity: 0.85, fontSize: '0.85rem' }}>We come to you</p>
-                        </div>
-                        <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <span style={{ fontSize: '2rem', marginBottom: '0.35rem' }}>⭐</span>
-                            <h3 style={{ fontSize: '1rem', marginBottom: '0.35rem' }}>5-Star Rated</h3>
-                            <p style={{ opacity: 0.85, fontSize: '0.85rem' }}>Trusted by customers</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             {/* Contact Modal */}
             <AnimatePresence>

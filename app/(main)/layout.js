@@ -7,8 +7,22 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'FixCarKeys - Professional Car Key Services',
+  metadataBase: new URL('https://fixcarkeys.co.uk'),
+  title: {
+    default: 'FixCarKeys - Professional Car Key Services',
+    template: '%s | FixCarKeys'
+  },
   description: 'Professional car key cutting, programming, and replacement services for all vehicle makes and models.',
+  openGraph: {
+    type: 'website',
+    locale: 'en_GB',
+    url: 'https://fixcarkeys.co.uk',
+    siteName: 'FixCarKeys',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }) {

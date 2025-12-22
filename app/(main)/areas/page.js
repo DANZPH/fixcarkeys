@@ -306,9 +306,9 @@ export default function AreasPage() {
             </div>
 
             {/* Map */}
-            <div style={{ height: '500px' }}>
+            <div style={{ height: '500px', position: 'relative' }}>
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1523489.8010036945!2d-3.9772853!3d53.4807593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487a4d4c5226f5db%3A0xd9be143804fe6baa!2sNorth%20West%20England!5e0!3m2!1sen!2suk!4v1702500000000!5m2!1sen!2suk"
+                src="https://maps.google.com/maps?q=FixCarKeys%20North%20West%20UK&t=&z=9&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -316,6 +316,31 @@ export default function AreasPage() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
+              <a
+                href="https://maps.app.goo.gl/wPajYwMJRGG5zvVp6"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  position: 'absolute',
+                  bottom: '20px',
+                  right: '20px',
+                  backgroundColor: 'white',
+                  color: '#778873',
+                  padding: '10px 20px',
+                  borderRadius: '50px',
+                  textDecoration: 'none',
+                  fontWeight: '600',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                  zIndex: 10,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  fontSize: '0.9rem'
+                }}
+              >
+                <MapPin size={16} />
+                Open in Google Maps
+              </a>
             </div>
 
             {/* Modal Footer */}

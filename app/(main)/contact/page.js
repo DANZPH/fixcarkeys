@@ -283,7 +283,7 @@ export default function ContactPage() {
 
                             {[
                                 { icon: <Phone size={24} />, title: 'Phone', info: phoneNumber, sub: '24/7 Emergency Line Available' },
-                                { icon: <Mail size={24} />, title: 'Email', info: settings.email || 'info@fixcarkeys.co.uk', sub: 'We reply within 24 hours' },
+                                { icon: <Mail size={24} />, title: 'Email', info: 'fixcarkeys@yahoo.com', sub: 'We reply within 24 hours' },
                                 { icon: <MapPin size={24} />, title: 'Location', info: settings.address || 'North West England, UK', sub: 'Mobile service available' },
                                 { icon: <Clock size={24} />, title: 'Hours', info: settings.hours || 'Mon-Sun: 24/7', sub: 'Emergency availability' }
                             ].map((item, i) => (

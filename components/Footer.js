@@ -17,7 +17,7 @@ export default function Footer() {
 
   const phoneNumber = settings.phone_number || '07444 125447';
   const whatsappNumber = settings.whatsapp_number || '447444125447';
-  const email = settings.email || 'info@fixcarkeys.co.uk';
+  const email = 'fixcarkeys@yahoo.com';
   const facebookUrl = settings.facebook_url || 'https://www.facebook.com/profile.php?id=61557261796916';
   const instagramUrl = settings.instagram_url || 'https://www.instagram.com/fixcarkeys';
   const tiktokUrl = settings.tiktok_url || 'https://tiktok.com/@FixCarKeys';
@@ -76,6 +76,9 @@ export default function Footer() {
               </a>
               <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" suppressHydrationWarning style={{ color: '#D2DCB6', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <MessageCircle size={16} /> WhatsApp
+              </a>
+              <a href={`mailto:${email}`} suppressHydrationWarning style={{ color: '#D2DCB6', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg> {email}
               </a>
             </div>
             <h4 style={{ marginTop: '1.5rem', marginBottom: '1rem', fontWeight: '600' }}>Follow Us</h4>

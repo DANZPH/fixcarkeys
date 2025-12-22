@@ -25,7 +25,7 @@ export default function FloatingButtons() {
             {/* Call Button - Right */}
             <motion.a
                 href="tel:07444125447"
-                className="floating-btn fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full border-2 border-white bg-[#778873] text-[#F1F3E0] shadow-lg transition-colors hover:bg-[#667762]"
+                className="floating-btn fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full border-2 border-white bg-[#DC2626] text-white shadow-lg transition-colors hover:bg-[#B91C1C]"
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 whileHover={{ scale: 1.1 }}

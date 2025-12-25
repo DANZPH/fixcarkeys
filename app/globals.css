@@ -575,11 +575,13 @@ body {
   .hero-description {
     font-size: 0.95rem !important;
     line-height: 1.6 !important;
+    margin-bottom: 1.5rem !important;
   }
 
   .hero-buttons {
     flex-direction: column !important;
     width: 100% !important;
+    margin-bottom: 1rem !important;
   }
 
   .hero-buttons>* {
@@ -633,8 +635,12 @@ body {
 
   /* Page header sections */
   section:first-of-type {
-    padding-top: 120px !important;
-    padding-bottom: 50px !important;
+    padding-top: 70px !important;
+    padding-bottom: 40px !important;
+  }
+
+  #home {
+    min-height: auto !important;
   }
 
   /* Footer adjustments */

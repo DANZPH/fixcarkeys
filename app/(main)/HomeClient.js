@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LayoutTextFlip } from "@/components/ui/TextFlip";
@@ -8,6 +8,11 @@ import { Phone, ChevronRight, Shield, Clock, Wrench } from 'lucide-react';
 
 export default function HomeClient({ initialContent }) {
     const [showContactModal, setShowContactModal] = useState(false);
+    const [hasMounted, setHasMounted] = useState(false);
+
+    useEffect(() => {
+        setHasMounted(true);
+    }, []);
 
     // Use initialContent directly
     const { settings, services } = initialContent || {
@@ -33,45 +38,51 @@ export default function HomeClient({ initialContent }) {
                 overflow: 'hidden'
             }}>
                 {/* Grid Background */}
-                <div style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    backgroundImage: `
+                <div
+                    suppressHydrationWarning
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        backgroundImage: `
             linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px)
           `,
-                    backgroundSize: '40px 40px',
-                    pointerEvents: 'none',
-                    zIndex: 0
-                }} />
+                        backgroundSize: '40px 40px',
+                        pointerEvents: 'none',
+                        zIndex: 0
+                    }} />
                 <div className="container" style={{ position: 'relative', zIndex: 1, width: '100%' }}>
                     <div className="hero-content" style={{
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
-                        gap: '2rem',
+                        gap: '3rem',
                         flexWrap: 'wrap-reverse'
                     }}>
                         <div className="hero-text" style={{ flex: '1 1 320px', textAlign: 'left', minWidth: '280px' }}>
                             <h1 className="hero-title" style={{
-                                fontSize: '4.5rem',
-                                marginBottom: '0.5rem',
+                                fontSize: '5rem',
+                                marginBottom: '1rem',
                                 fontWeight: '800',
                                 lineHeight: 1.1,
                                 letterSpacing: '-2px',
                                 textShadow: '0 2px 10px rgba(0,0,0,0.1)'
                             }}>
-                                <LayoutTextFlip
-                                    staticText='Fix'
-                                    flipWords={['CarKeys', 'AutoKeys', 'Keys', 'Fobs']}
-                                    interval={2500}
-                                />
+                                {hasMounted ? (
+                                    <LayoutTextFlip
+                                        staticText='Fix'
+                                        flipWords={['CarKeys', 'AutoKeys', 'Keys', 'Fobs']}
+                                        interval={2500}
+                                    />
+                                ) : (
+                                    'Fix CarKeys'
+                                )}
                             </h1>
                             <div className="hero-subtitle" style={{
-                                fontSize: '1.5rem',
+                                fontSize: '2rem',
                                 fontWeight: '700',
                                 marginBottom: '2rem',
                                 letterSpacing: '3px',
@@ -82,11 +93,11 @@ export default function HomeClient({ initialContent }) {
                                 MOBILE AUTO LOCKSMITH
                             </div>
                             <p className="hero-description" style={{
-                                fontSize: '1.25rem',
+                                fontSize: '1.5rem',
                                 marginBottom: '2.5rem',
                                 opacity: 0.95,
                                 lineHeight: 1.7,
-                                maxWidth: '600px'
+                                maxWidth: '750px'
                             }}>
                                 Lost your car keys? Need a spare? We provide fast, reliable car key cutting, programming, and replacement services for all vehicle makes and models.
                             </p>
@@ -123,26 +134,31 @@ export default function HomeClient({ initialContent }) {
                         </div>
 
                         <div className="hero-media" style={{ flex: '1 1 280px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minWidth: '250px' }}>
-                            <a href={`tel:${phoneNumber.replace(/\s/g, '')}`} style={{
-                                fontSize: 'clamp(1.5rem, 5vw, 2.5rem)',
-                                fontWeight: '800',
-                                color: '#F1F3E0',
-                                textDecoration: 'none',
-                                marginBottom: '1.5rem',
-                                textShadow: '0 2px 4px rgba(0,0,0,0.2)',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '0.75rem',
-                                zIndex: 10,
-                                whiteSpace: 'nowrap'
-                            }}>
-                                <Phone fill="currentColor" size={32} style={{ filter: 'drop-shadow(0 2px 2px rgba(0,0,0,0.2))' }} />
+                            <motion.a
+                                href={`tel:${phoneNumber.replace(/\s/g, '')}`}
+                                animate={{ scale: [1, 1.05, 1] }}
+                                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                                style={{
+                                    fontSize: 'clamp(2rem, 6vw, 3.5rem)',
+                                    fontWeight: '800',
+                                    color: '#F1F3E0',
+                                    textDecoration: 'none',
+                                    marginBottom: '1.5rem',
+                                    textShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '1rem',
+                                    zIndex: 10,
+                                    whiteSpace: 'nowrap'
+                                }}
+                            >
+                                <Phone fill="currentColor" size={42} style={{ filter: 'drop-shadow(0 2px 2px rgba(0,0,0,0.2))' }} />
                                 {phoneNumber}
-                            </a>
+                            </motion.a>
                             <div className="hero-video" style={{
                                 position: 'relative',
                                 width: '100%',
-                                maxWidth: '800px',
+                                maxWidth: '1000px',
                                 borderRadius: '24px',
                                 overflow: 'hidden',
                                 boxShadow: '0 25px 50px rgba(0,0,0,0.25)',

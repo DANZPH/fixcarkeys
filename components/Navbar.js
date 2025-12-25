@@ -11,7 +11,12 @@ export default function Navbar() {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [scrolled, setScrolled] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   // Close menu when route changes
   useEffect(() => {
@@ -137,13 +142,13 @@ export default function Navbar() {
                 style={{
                   color: '#F1F3E0',
                   textDecoration: 'none',
-                  fontWeight: isActive(link.href) ? '700' : '500',
+                  fontWeight: (hasMounted && isActive(link.href)) ? '700' : '500',
                   fontSize: '0.95rem',
                   padding: '0.5rem 0',
                   position: 'relative',
                   transition: 'opacity 0.3s ease',
                   cursor: 'pointer',
-                  borderBottom: isActive(link.href) ? '2px solid #F1F3E0' : '2px solid transparent'
+                  borderBottom: (hasMounted && isActive(link.href)) ? '2px solid #F1F3E0' : '2px solid transparent'
                 }}
               >
                 {link.label}
@@ -231,7 +236,7 @@ export default function Navbar() {
               }}
             >
               {link.label}
-              {isActive(link.href) && <span style={{ opacity: 0.7 }}>•</span>}
+              {(hasMounted && isActive(link.href)) && <span style={{ opacity: 0.7 }}>•</span>}
             </Link>
           ))}
 

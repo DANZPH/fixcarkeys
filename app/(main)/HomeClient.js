@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LayoutTextFlip } from "@/components/ui/TextFlip";
-import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { Phone, ChevronRight, Shield, Clock, Wrench } from 'lucide-react';
 
 export default function HomeClient({ initialContent }) {
@@ -25,7 +24,7 @@ export default function HomeClient({ initialContent }) {
             {/* Hero Section */}
             <section id="home" suppressHydrationWarning style={{
                 background: 'linear-gradient(135deg, #778873 0%, #A1BC98 50%, #D2DCB6 100%)',
-                padding: '120px 0 60px',
+                padding: '50px 0 60px',
                 color: 'white',
                 minHeight: '100vh',
                 display: 'flex',
@@ -120,45 +119,6 @@ export default function HomeClient({ initialContent }) {
                                     }}>
                                     View Services
                                 </Link>
-                            </div>
-                            <div className="hero-stats" style={{
-                                display: 'grid',
-                                gridTemplateColumns: 'repeat(3, 1fr)',
-                                gap: '2rem',
-                                maxWidth: '500px',
-                                paddingTop: '2rem',
-                                borderTop: '1px solid rgba(255,255,255,0.2)'
-                            }}>
-                                <div>
-                                    <div style={{ fontSize: '2rem', fontWeight: '700' }}>
-                                        <AnimatedCounter
-                                            end={parseInt(settings.hero_stat_1_value) || 24}
-                                            duration={1500}
-                                            suffix={settings.hero_stat_1_value?.includes('/') ? '/7' : ''}
-                                        />
-                                    </div>
-                                    <div style={{ opacity: 0.85, fontSize: '0.9rem' }}>{settings.hero_stat_1_label || 'Emergency Service'}</div>
-                                </div>
-                                <div>
-                                    <div style={{ fontSize: '2rem', fontWeight: '700' }}>
-                                        <AnimatedCounter
-                                            end={parseInt(settings.hero_stat_2_value) || 15}
-                                            duration={1800}
-                                            suffix={settings.hero_stat_2_value?.includes('+') ? '+' : ''}
-                                        />
-                                    </div>
-                                    <div style={{ opacity: 0.85, fontSize: '0.9rem' }}>{settings.hero_stat_2_label || 'Years Experience'}</div>
-                                </div>
-                                <div>
-                                    <div style={{ fontSize: '2rem', fontWeight: '700' }}>
-                                        <AnimatedCounter
-                                            end={parseInt(settings.hero_stat_3_value) || 100}
-                                            duration={2000}
-                                            suffix={settings.hero_stat_3_value?.includes('%') ? '%' : ''}
-                                        />
-                                    </div>
-                                    <div style={{ opacity: 0.85, fontSize: '0.9rem' }}>{settings.hero_stat_3_label || 'Satisfaction'}</div>
-                                </div>
                             </div>
                         </div>
 

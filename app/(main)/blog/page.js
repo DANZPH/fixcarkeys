@@ -8,8 +8,10 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 export default function BlogPage() {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [hasMounted, setHasMounted] = useState(false);
 
     useEffect(() => {
+        setHasMounted(true);
         async function fetchPosts() {
             try {
                 const res = await fetch('/api/blog');
@@ -31,7 +33,7 @@ export default function BlogPage() {
             {/* Page Header */}
             <section style={{
                 background: 'linear-gradient(135deg, #778873 0%, #A1BC98 50%, #D2DCB6 100%)',
-                padding: '160px 0 80px',
+                padding: 'clamp(100px, 15vh, 160px) 0 clamp(60px, 8vh, 80px)',
                 color: 'white',
                 position: 'relative',
                 overflow: 'hidden'
@@ -53,29 +55,31 @@ export default function BlogPage() {
                 }} />
                 <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
                     <h1 style={{
-                        fontSize: '3.5rem',
+                        fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
                         fontWeight: '800',
                         marginBottom: '1rem',
-                        letterSpacing: '-1px'
+                        letterSpacing: '-1px',
+                        lineHeight: 1.2
                     }}>Tips & Resources</h1>
                     <p style={{
-                        fontSize: '1.25rem',
+                        fontSize: 'clamp(1rem, 2vw, 1.25rem)',
                         opacity: 0.9,
                         maxWidth: '600px',
-                        margin: '0 auto'
+                        margin: '0 auto',
+                        padding: '0 1rem'
                     }}>Helpful articles about car keys and locksmith services</p>
                 </div>
             </section>
 
             {/* Blog Posts Grid */}
-            <section style={{ padding: '100px 0', backgroundColor: '#F1F3E0' }}>
+            <section style={{ padding: 'clamp(60px, 10vh, 100px) 0', backgroundColor: '#F1F3E0' }}>
                 <div className="container">
                     {loading ? (
                         <LoadingSpinner text="Loading articles..." variant="default" size="medium" />
                     ) : posts.length > 0 ? (
                         <div style={{
                             display: 'grid',
-                            gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
+                            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
                             gap: '2rem'
                         }}>
                             {posts.map((post, index) => (
@@ -173,7 +177,7 @@ export default function BlogPage() {
                                                 color: '#999'
                                             }}>
                                                 <span>
-                                                    {post.created_at ? new Date(post.created_at).toLocaleDateString('en-GB', {
+                                                    {hasMounted && post.created_at ? new Date(post.created_at).toLocaleDateString('en-GB', {
                                                         day: 'numeric',
                                                         month: 'short',
                                                         year: 'numeric'

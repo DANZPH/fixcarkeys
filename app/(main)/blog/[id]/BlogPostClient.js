@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -9,11 +10,15 @@ import rehypeRaw from 'rehype-raw';
 
 export default function BlogPostClient({ post }) {
     const router = useRouter();
+    const [formattedDate, setFormattedDate] = useState('');
 
-    // Format date
-    const date = new Date(post.created_at).toLocaleDateString('en-US', {
-        year: 'numeric', month: 'long', day: 'numeric'
-    });
+    useEffect(() => {
+        if (post.created_at) {
+            setFormattedDate(new Date(post.created_at).toLocaleDateString('en-US', {
+                year: 'numeric', month: 'long', day: 'numeric'
+            }));
+        }
+    }, [post.created_at]);
 
     // Handle back navigation
     const handleBack = () => {
@@ -21,12 +26,13 @@ export default function BlogPostClient({ post }) {
     };
 
     return (
-        <div className="min-h-screen bg-white pb-16" style={{ paddingTop: '100px' }}>
+        <div className="min-h-screen bg-white pb-16" style={{ paddingTop: 'clamp(80px, 12vh, 100px)' }}>
             <div className="container mx-auto px-4 max-w-3xl">
                 {/* Breadcrumb / Back Link */}
                 <button
                     onClick={handleBack}
                     className="inline-flex items-center text-[#778873] hover:text-[#5f6d5c] mb-8 font-medium transition-colors cursor-pointer bg-transparent border-none"
+                    style={{ fontSize: '0.95rem' }}
                 >
                     <ArrowLeft className="w-4 h-4 mr-2" />
                     Back to Articles
@@ -51,7 +57,7 @@ export default function BlogPostClient({ post }) {
                         </div>
                         <div className="flex items-center gap-2">
                             <Calendar className="w-4 h-4" />
-                            <span>{date}</span>
+                            <span>{formattedDate || '...'}</span>
                         </div>
                     </div>
                 </header>
@@ -75,7 +81,7 @@ export default function BlogPostClient({ post }) {
                 <article className="prose prose-lg max-w-none">
                     <style jsx global>{`
                         .blog-content h1 {
-                            font-size: 2rem;
+                            font-size: clamp(1.75rem, 4vw, 2.25rem);
                             font-weight: 700;
                             color: #1a1f2e;
                             margin-top: 2rem;
@@ -83,7 +89,7 @@ export default function BlogPostClient({ post }) {
                             line-height: 1.3;
                         }
                         .blog-content h2 {
-                            font-size: 1.5rem;
+                            font-size: clamp(1.4rem, 3vw, 1.75rem);
                             font-weight: 700;
                             color: #1a1f2e;
                             margin-top: 2rem;
@@ -91,7 +97,7 @@ export default function BlogPostClient({ post }) {
                             line-height: 1.4;
                         }
                         .blog-content h3 {
-                            font-size: 1.25rem;
+                            font-size: clamp(1.2rem, 2.5vw, 1.4rem);
                             font-weight: 600;
                             color: #1a1f2e;
                             margin-top: 1.5rem;
@@ -101,6 +107,7 @@ export default function BlogPostClient({ post }) {
                             color: #4a5568;
                             line-height: 1.8;
                             margin-bottom: 1.25rem;
+                            font-size: clamp(1rem, 2vw, 1.125rem);
                         }
                         .blog-content ul, .blog-content ol {
                             margin-left: 1.5rem;
@@ -110,6 +117,7 @@ export default function BlogPostClient({ post }) {
                             color: #4a5568;
                             line-height: 1.7;
                             margin-bottom: 0.5rem;
+                            font-size: clamp(1rem, 2vw, 1.125rem);
                         }
                         .blog-content ul li {
                             list-style-type: disc;

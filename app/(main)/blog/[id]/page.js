@@ -3,7 +3,8 @@ import { getDb } from '@/lib/db';
 import { notFound } from 'next/navigation';
 import BlogPostClient from './BlogPostClient';
 
-export const dynamic = 'force-dynamic';
+// Cache for 60 seconds for better performance
+export const revalidate = 60;
 
 async function getBlogPost(id) {
     try {

@@ -1,7 +1,7 @@
 import { getDb } from '@/lib/db';
 
 function slugify(text) {
-    return text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') : '';
+    return text ? text.toLowerCase().replace(/'/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') : '';
 }
 
 export async function GET() {

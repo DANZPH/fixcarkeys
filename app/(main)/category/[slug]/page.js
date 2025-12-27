@@ -1,5 +1,5 @@
 import { getDb } from '@/lib/db';
-import BlogClient from '../../BlogClient';
+import BlogClient from '../../blog/BlogClient';
 import { notFound } from 'next/navigation';
 
 export const revalidate = 60;
@@ -33,7 +33,7 @@ async function getCategoryPosts(slug) {
 }
 
 export async function generateMetadata({ params }) {
-    const { category: slug } = await params;
+    const { slug } = await params;
     const data = await getCategoryPosts(slug);
     
     if (!data) return { title: 'Category Not Found' };
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function CategoryPage({ params }) {
-    const { category: slug } = await params;
+    const { slug } = await params;
     const data = await getCategoryPosts(slug);
 
     if (!data) {

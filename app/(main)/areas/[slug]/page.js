@@ -6,7 +6,7 @@ import { Phone, MapPin, ArrowLeft } from 'lucide-react';
 export const revalidate = 60;
 
 function slugify(text) {
-    return text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') : '';
+    return text ? text.toLowerCase().replace(/'/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') : '';
 }
 
 async function getArea(slug) {

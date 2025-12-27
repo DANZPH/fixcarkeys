@@ -1,6 +1,13 @@
 import { getDb, initializeDatabase, seedDefaultData } from '@/lib/db';
 import HomeClient from './HomeClient';
 
+export const metadata = {
+  title: {
+    absolute: 'FixCarKeys - Professional Car Key Services'
+  },
+  description: 'Professional car key cutting, programming, and replacement services for all vehicle makes and models.'
+};
+
 // Ensure data is cached but fresh enough
 export const revalidate = 30; // 30 seconds cache
 

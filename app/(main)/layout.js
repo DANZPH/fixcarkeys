@@ -13,6 +13,14 @@ export const metadata = {
     template: '%s | FixCarKeys'
   },
   description: 'Professional car key cutting, programming, and replacement services for all vehicle makes and models.',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.png', type: 'image/png', sizes: '192x192' },
+    ],
+    apple: '/apple-icon.png',
+  },
+  manifest: '/manifest.json',
   openGraph: {
     type: 'website',
     locale: 'en_GB',

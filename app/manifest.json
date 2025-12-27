@@ -1,0 +1,19 @@
+{
+  "name": "FixCarKeys",
+  "short_name": "FixCarKeys",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#778873",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}

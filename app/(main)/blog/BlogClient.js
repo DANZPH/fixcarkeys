@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-export default function BlogClient({ initialPosts }) {
+export default function BlogClient({ initialPosts, title = "Tips & Resources", subtitle = "Expert advice on car key replacement, programming, and security." }) {
     const [posts] = useState(initialPosts || []);
     const [hasMounted, setHasMounted] = useState(false);
 
@@ -43,14 +43,14 @@ export default function BlogClient({ initialPosts }) {
                         marginBottom: '1rem',
                         letterSpacing: '-1px',
                         lineHeight: 1.2
-                    }}>Tips & Resources</h1>
+                    }}>{title}</h1>
                     <p style={{
                         fontSize: 'clamp(1rem, 2vw, 1.25rem)',
                         opacity: 0.9,
                         maxWidth: '600px',
                         margin: '0 auto',
                         padding: '0 1rem'
-                    }}>Helpful articles about car keys and locksmith services</p>
+                    }}>{subtitle}</p>
                 </div>
             </section>
 

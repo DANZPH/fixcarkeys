@@ -24,16 +24,6 @@ export default function ContactPage() {
         'Honda', 'Kia', 'Hyundai', 'Land Rover', 'Other'
     ];
 
-    const operatingHours = [
-        { day: 'Monday', status: 'Open' },
-        { day: 'Tuesday', status: 'Open' },
-        { day: 'Wednesday', status: 'Open' },
-        { day: 'Thursday', status: 'Open' },
-        { day: 'Friday', status: 'Open' },
-        { day: 'Saturday', status: 'Open' },
-        { day: 'Sunday', status: 'Closed' }
-    ];
-
     useEffect(() => {
         async function fetchData() {
             try {
@@ -95,10 +85,7 @@ export default function ContactPage() {
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    backgroundImage: `
-                        linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px)
-                    `,
+                    backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px)',
                     backgroundSize: '40px 40px',
                     pointerEvents: 'none',
                     zIndex: 0
@@ -133,7 +120,7 @@ export default function ContactPage() {
                     }}>
 
                         {/* Left Column: Contact Info */}
-                        <div style={{
+                        <div className="contact-info-sticky" style={{
                             backgroundColor: 'white',
                             borderRadius: '24px',
                             padding: '3rem',
@@ -199,25 +186,6 @@ export default function ContactPage() {
                                     </div>
                                 </div>
                             </div>
-
-                            {/* Operating Hours */}
-                            <div>
-                                <h3 style={{ color: '#333', fontSize: '1.25rem', marginBottom: '1rem', fontWeight: '700' }}>
-                                    Operating Hours
-                                </h3>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                                    {operatingHours.map((item, index) => (
-                                        <div key={index} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.95rem', borderBottom: index !== operatingHours.length - 1 ? '1px solid #eee' : 'none', paddingBottom: '0.5rem' }}>
-                                            <span style={{ color: '#555' }}>{item.day}</span>
-                                            <span style={{
-                                                fontWeight: '600',
-                                                color: item.status === 'Open' ? '#778873' : '#d9534f'
-                                            }}>{item.status}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
                         </div>
 
                         {/* Right Column: Contact Form */}

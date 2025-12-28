@@ -120,6 +120,15 @@ body {
   box-shadow: 0 4px 12px rgba(119, 136, 115, 0.3);
 }
 
+/* Desktop Only Contact Page Styles */
+@media (min-width: 1025px) {
+  .contact-info-sticky {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+  }
+}
+
 /* Responsive styles */
 @media (max-width: 1200px) {
   #car-brands>div>div:last-of-type:not(:first-of-type) {

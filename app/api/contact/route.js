@@ -26,7 +26,7 @@ export async function POST(request) {
 
         const mailOptions = {
             from: `"${process.env.MAIL_FROM_NAME}" <${process.env.MAIL_FROM_ADDRESS}>`,
-            to: 'kentdancel2003@gmail.com',
+            to: 'fixcarkeys@yahoo.com',
             replyTo: email,
             subject: `New Quote Request: ${carMake || 'Car Key Service'} - ${name}`,
             text: `

@@ -125,7 +125,7 @@ export default function Navbar() {
               transition: 'background 0.3s ease'
             }}
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <X size={24} suppressHydrationWarning /> : <Menu size={24} suppressHydrationWarning />}
           </button>
 
           {/* Desktop navigation */}

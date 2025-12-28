@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Phone, Mail, MapPin, Clock, MessageCircle, Send } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, MessageCircle, Send, CheckCircle, XCircle } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function ContactPage() {
     const [settings, setSettings] = useState({});
@@ -52,16 +53,40 @@ export default function ContactPage() {
         fetchData();
     }, []);
 
-    const handleSubmit = (e) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState('');
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Here you would typically send the form data to your backend
-        console.log(formData);
-        setSubmitted(true);
-        setTimeout(() => setSubmitted(false), 5000);
-        setFormData({
-            name: '', email: '', phone: '', postcode: '',
-            carMake: '', service: '', message: ''
-        });
+        setIsSubmitting(true);
+        setSubmitError('');
+
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                setSubmitted(true);
+                setFormData({
+                    name: '', email: '', phone: '', postcode: '',
+                    carMake: '', service: '', message: ''
+                });
+                setTimeout(() => setSubmitted(false), 5000);
+            } else {
+                setSubmitError(data.error || 'Something went wrong. Please try again.');
+            }
+        } catch (error) {
+            setSubmitError('Failed to send message. Please try again later.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const phoneNumber = settings.phone_number || '07444 125447';
@@ -70,6 +95,67 @@ export default function ContactPage() {
 
     return (
         <>
+            {/* Popup Notification */}
+            <AnimatePresence>
+                {submitted && (
+                    <motion.div
+                        initial={{ opacity: 0, x: 100 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 100 }}
+                        style={{
+                            position: 'fixed',
+                            top: '20px',
+                            right: '20px',
+                            backgroundColor: '#fff',
+                            color: '#778873',
+                            padding: '1rem 1.5rem',
+                            borderRadius: '12px',
+                            boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                            zIndex: 9999,
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.75rem',
+                            borderLeft: '5px solid #778873',
+                            minWidth: '300px'
+                        }}
+                    >
+                        <CheckCircle size={24} color="#778873" />
+                        <div>
+                            <h4 style={{ margin: 0, fontSize: '1rem', fontWeight: 'bold', color: '#333' }}>Success!</h4>
+                            <p style={{ margin: 0, fontSize: '0.9rem', color: '#666' }}>Message sent successfully.</p>
+                        </div>
+                    </motion.div>
+                )}
+                {submitError && (
+                    <motion.div
+                        initial={{ opacity: 0, x: 100 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 100 }}
+                        style={{
+                            position: 'fixed',
+                            top: '20px',
+                            right: '20px',
+                            backgroundColor: '#fff',
+                            color: '#c62828',
+                            padding: '1rem 1.5rem',
+                            borderRadius: '12px',
+                            boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                            zIndex: 9999,
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.75rem',
+                            borderLeft: '5px solid #c62828',
+                            minWidth: '300px'
+                        }}
+                    >
+                        <XCircle size={24} color="#c62828" />
+                        <div>
+                            <h4 style={{ margin: 0, fontSize: '1rem', fontWeight: 'bold', color: '#333' }}>Error</h4>
+                            <p style={{ margin: 0, fontSize: '0.9rem', color: '#666' }}>{submitError}</p>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
             {/* Page Header */}
             <section style={{
                 background: 'linear-gradient(135deg, #778873 0%, #A1BC98 50%, #D2DCB6 100%)',
@@ -202,21 +288,7 @@ export default function ContactPage() {
                                 Fill out the form below for a free quote. We aim to respond within 30 minutes.
                             </p>
 
-                            {submitted && (
-                                <div style={{
-                                    backgroundColor: '#D2DCB6',
-                                    color: '#778873',
-                                    padding: '1rem',
-                                    borderRadius: '10px',
-                                    marginBottom: '1.5rem',
-                                    fontWeight: '600',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '0.5rem'
-                                }}>
-                                    Currently this is a demo form. Your message would be sent!
-                                </div>
-                            )}
+
 
                             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
 
@@ -361,15 +433,15 @@ export default function ContactPage() {
                                     />
                                 </div>
 
-                                <button type="submit" style={{
-                                    backgroundColor: '#778873',
+                                <button type="submit" disabled={isSubmitting} style={{
+                                    backgroundColor: isSubmitting ? '#99aab5' : '#778873',
                                     color: 'white',
                                     padding: '18px',
                                     borderRadius: '12px',
                                     border: 'none',
                                     fontSize: '1.1rem',
                                     fontWeight: '700',
-                                    cursor: 'pointer',
+                                    cursor: isSubmitting ? 'not-allowed' : 'pointer',
                                     transition: 'all 0.3s ease',
                                     marginTop: '1rem',
                                     display: 'flex',
@@ -378,8 +450,14 @@ export default function ContactPage() {
                                     gap: '0.5rem',
                                     boxShadow: '0 4px 14px rgba(119, 136, 115, 0.4)'
                                 }}>
-                                    <Send size={20} />
-                                    Send Message & Get Quote
+                                    {isSubmitting ? (
+                                        'Sending...'
+                                    ) : (
+                                        <>
+                                            <Send size={20} />
+                                            Send Message & Get Quote
+                                        </>
+                                    )}
                                 </button>
                             </form>
                         </div>
